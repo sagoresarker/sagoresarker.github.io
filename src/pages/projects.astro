@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+---
+
+<BaseLayout title="Manuel Ernesto Garcia | Projects">
+  <div>
+    <div class="text-3xl w-full font-bold mb-5">SaaS</div>
+  </div>
+  <HorizontalCard
+    title="CuCoders"
+    img="https://cucoders.dev/assets/img/cucoders_social.webp"
+    desc="Platform to enhance software development in Cuba and support developers and entrepreneurs in their professional career."
+    url="https://cucoders.dev/"
+    badge="FOSS"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="WeekTodo"
+    img="https://weektodo.me/weektodo_social_img.webp"
+    desc="Free and Open Source Minimalist Weekly Planner and To Do list App for simple and effective people."
+    url="https://weektodo.me/"
+    badge="FOSS"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Productiveness"
+    img="https://softr-prod.imgix.net/applications/f988aa05-d312-4aa6-812e-832bdc75388d/assets/d2c87a17-4fc7-455f-a656-5e4cdbe7aa71.png"
+    desc="Discover the best productivity apps in the market."
+    url="https://productiveness.softr.app/"
+  />
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Tools</div>
+  </div>
+
+  <HorizontalCard
+    title="Easy Filler"
+    img="https://lh3.googleusercontent.com/ryas4GamkNYq298vyov_q1eTWNLs-gvBNGYEyZts6gXatHIvbAjv57sFwsPEjJ8qh4JhMSwVSDH5Tp6adEXh9ZLMQQ=w640-h400-e365-rj-sc0x00ffffff"
+    desc="EasyFiller is a Chrome extension that automates the process of filling out online forms. Fill your forms with a single click."
+    url="https://easyfiller.softr.app/"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Zen Twitter"
+    img="https://lh3.googleusercontent.com/NGt846Flv6wyBSlYzfJkFHAJ8mcG1pf4M-InYeZnp4VsIk6JKk8nZ2ZKskDlvHDAEYr_biSO8jtXIWI83OXD5RNXWg=w640-h400-e365-rj-sc0x00ffffff"
+    desc="Disable Twitter vanity metrics, notifications and distractions."
+    url="https://chrome.google.com/webstore/detail/zen-twitter/nlkendkabgopehmlmohfbkgkjjdjepnb"
+    badge="FOSS"
+  />
+  <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Archived Projects</div>
+  </div>
+
+  <HorizontalCard
+    title="Qvalive"
+    img="https://manuelernestog.github.io/img/qvalive-splash.jpg"
+    desc="QvaLive es el espacio de las transmisiones cuabanas en vivo por internet."
+    url="https://github.com/manuelernestog/qvalive-post-bot"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="AlertasTuEnvio"
+    img="https://manuelernestog.github.io/img/photo_2022-12-29_18-03-14.jpg"
+    desc="Bot de telegram para notificar la publicacion de nuevos productos en las tiendas de TuEnvio."
+    url="https://github.com/manuelernestog/tu-envio-combo-search-bot"
+    badge="Telegram-Bot"
+  />
+</BaseLayout>
