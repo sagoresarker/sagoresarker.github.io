@@ -190,6 +190,11 @@ li::before {
     overflow-x: auto;
 }
 
+.highlight {
+    background-color: yellow; /* Change this to your desired highlighter color */
+    padding: 0 2px; /* Optional: add some padding to make the highlight more visible */
+}
+
 .gopher-image {
     position: absolute;
     top: 10px;
@@ -199,6 +204,17 @@ li::before {
     background-image: url('images/gopher.png');
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+.tag-line {
+    font-size: 1em; /* Corrected the spacing issue */
+    font-style: italic;
+    color: red;
+    margin-top: 10px;
+    padding: 10px 20px; /* Add padding for space inside the element */
+    border-left: 5px solid var(--accent-color); /* Add a left border to mimic a quote */
+    background-color: #f9f9f9; /* Optional: Add a background color */
+    quotes: "“" "”" "‘" "’"; /* Define quote marks */
 }
 
 .download-cv {
