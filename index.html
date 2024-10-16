@@ -64,45 +64,67 @@
 
             <section class="projects">
                 <h2>Personal Projects</h2>
-                <ul>
-                    <li>
-                        <strong>Memcached Operator:</strong> Developed a Kubernetes Operator in Go. Engineered a Kubernetes Operator to automate the deployment and management of Memcached clusters, enhancing scalability and automation within cloud environments.
+
+                <div class="project">
+                    <h3>
+                        <a href="https://github.com/sagoresarker/memcached-operator" target="_blank" class="github-link">
+                            Kubernetes Memcached Operator using Golang and Kubebuilder
+                        </a>
+                    </h3>
+                    <div class="project-content">
                         <ul>
-                            <li>Tools: Golang, Kubebuilder</li>
+                            <li>Developed a Kubernetes Operator in Go. Engineered a Kubernetes Operator to automate the deployment and management of Memcached clusters, enhancing scalability and automation within cloud environments.</li>
                             <li>Custom Resource Definitions (CRD) Implementation: Extended Kubernetes API with CRDs for managing Memcached configurations, allowing users to define and adjust their caching strategies declaratively.</li>
                         </ul>
-                        <a href="https://github.com/sagoresarker/memcached-operator" target="_blank">GitHub</a>
-                    </li>
-                    <li>
-                        <strong>Task Queue:</strong> Distributed Task Queue System in Golang
+                    </div>
+                </div>
+
+                <div class="project">
+                    <h3>
+                        <a href="https://github.com/sagoresarker/task-queue" target="_blank" class="github-link">
+                            Distributed Task Queue System in Golang
+                        </a>
+                    </h3>
+                    <div class="project-content">
                         <ul>
                             <li>Task Coordination: Utilizes a coordinator service to manage and distribute tasks across multiple worker nodes.</li>
                             <li>Dynamic Configuration: Supports dynamic configuration of the coordinator service port through command-line flags.</li>
                             <li>Database Integration: Integrates with a database to fetch connection strings, facilitating task persistence and state management.</li>
                             <li>Robust Task Handling: Capable of handling various task states such as queued, started, completed, and failed, ensuring comprehensive task lifecycle management.</li>
                         </ul>
-                        <a href="https://github.com/sagoresarker/task-queue" target="_blank">GitHub</a>
-                    </li>
-                    <li>
-                        <strong>Rate Limited Calculator:</strong> Rate-Limited Calculator Service Using Go and Redis
+                    </div>
+                </div>
+
+                <div class="project">
+                    <h3>
+                        <a href="https://github.com/sagoresarker/rate-limited-calculator-golang" target="_blank" class="github-link">
+                            Rate-Limited Calculator Service Using Go and Redis
+                        </a>
+                    </h3>
+                    <div class="project-content">
                         <ul>
                             <li>Rate Limiting: Implements a sliding window rate limiting algorithm to manage the number of requests a user can make within a specified time frame, using Redis for efficient storage and retrieval of request timestamps.</li>
                             <li>RESTful API: Provides a REST API endpoint /calculate that supports various mathematical operations such as addition, subtraction, multiplication, division, modulo, power, and factorial.</li>
                             <li>Error Handling: Robust error handling to manage and respond to issues such as rate limit exceedance, Redis connection failures, and invalid mathematical operations (like division by zero).</li>
                             <li>Unit Testing: The project includes unit tests for critical components such as the rate limiter and the mathematical operations of the calculator.</li>
                         </ul>
-                        <a href="https://github.com/sagoresarker/rate-limited-calculator" target="_blank">GitHub</a>
-                    </li>
-                    <li>
-                        <strong>Real-Time Event Processing System:</strong> Real-Time Event Processing System with Redis Pub/Sub in Go
+                    </div>
+                </div>
+
+                <div class="project">
+                    <h3>
+                        <a href="https://github.com/sagoresarker/redis-pubsub-example-eda" target="_blank" class="github-link">
+                            Real-Time Event Processing System with Redis Pub/Sub in Go
+                        </a>
+                    </h3>
+                    <div class="project-content">
                         <ul>
                             <li>Event-Driven Architecture: Utilizes the publish-subscribe pattern to handle real-time data processing, enhancing the system's responsiveness and scalability.</li>
                             <li>Redis Integration: Leverages Redis as a message broker to efficiently distribute messages across different components of the application.</li>
                             <li>Real-Time Notifications: Implements subscribers that listen to specific Redis channels for events like user creation or order updates, enabling real-time notifications and actions.</li>
                         </ul>
-                        <a href="https://github.com/sagoresarker/real-time-event-processing" target="_blank">GitHub</a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </section>
         </main>
     </div>

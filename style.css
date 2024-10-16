@@ -1,12 +1,13 @@
 :root {
     --primary-color: #2c3e50;
-    --secondary-color: #00ADD8; /* Go's official color */
+    --secondary-color: #00ADD8;
     --background-color: #f9f9f9;
     --text-color: #333;
     --border-color: #e0e0e0;
-    --accent-color: #5DC9E2; /* Lighter shade of Go's color */
+    --accent-color: #5DC9E2;
     --code-bg: #f0f0f0;
 }
+
 
 body {
     font-family: 'Roboto Mono', monospace;
@@ -15,6 +16,7 @@ body {
     background-color: var(--background-color);
     margin: 0;
     padding: 20px;
+    text-align: justify;
 }
 
 body::before {
@@ -178,6 +180,7 @@ li::before {
     content: "🚀";
     position: absolute;
     left: 0;
+    color: var(--background-color);
 }
 
 .code-block {
@@ -245,6 +248,82 @@ li::before {
 .cursor::after {
     content: "|";
     animation: blink 1s infinite;
+}
+
+.job {
+    margin-bottom: 25px;
+    padding-left: 15px;
+    border-left: 3px solid var(--accent-color);
+    position: relative;
+}
+
+.project {
+    margin-bottom: 25px;
+    padding-left: 15px;
+    border-left: 3px solid var(--accent-color);
+    position: relative;
+}
+
+.project h3 {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-left: 0;
+    width: 100%;
+    font-size: 1.2em;  /* Match job h3 size */
+    color: var(--primary-color);
+}
+
+/* Remove the border from project-content since it's now on the project div */
+.project-content {
+    padding-left: 0;
+    border-left: none;
+    margin-top: 10px;
+}
+
+.github-link {
+    font-size: 0.9em;
+    white-space: nowrap;
+    margin-left: 15px;
+    position: absolute;
+    padding-left: 15px;
+    color: var(--primary-color); /* Change to primary color for visibility */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.github-link:hover {
+    color: var(--accent-color); /* Change color on hover */
+}
+
+/* Update project list styling to match job list styling */
+.projects ul {
+    list-style-type: none;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.projects li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 25px;  /* Match job li padding */
+}
+
+.projects li::before {
+    content: "$ ";
+    color: var(--secondary-color);
+    position: absolute;
+    left: 0;  /* Match job li::before positioning */
+    font-weight: bold;
+}
+
+/* Keep the existing h3::before style */
+.project h3::before {
+    content: "## ";
+    color: var(--accent-color);
+    font-size: 0.8em;
 }
 
 /* Responsive adjustments */
