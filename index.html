@@ -20,13 +20,13 @@
             </p>
             <div class="gopher-image"></div>
 
-            <div class="tag-line"> I love System Programming...</div>
+            <div class="tag-line"> I love Data Intensive Systems...</div>
         </header>
 
         <main>
             <section class="summary">
                 <h2>Professional Summary</h2>
-                <p>Dedicated Backend Engineer passionate about building and optimizing large-scale distributed systems. Expertise in Kubernetes, microservices, and CI/CD pipelines. Committed to designing and maintaining scalable, secure, and high-availability backend solutions for innovative projects.</p>
+                <p>As a Backend Engineer, I specialize in architecting and optimizing data-intensive distributed systems that operate at scale. I design resilient backend solutions that excel in performance and fault tolerance, with a focus on building robust distributed architectures. My passion lies in tackling complex distributed computing challenges, from ensuring data consistency across nodes to optimizing system throughput in large-scale deployments.</p>
             </section>
 
             <section class="experience">
@@ -63,37 +63,45 @@
             </section>
 
             <section class="projects">
-                <h2>Key Projects</h2>
+                <h2>Personal Projects</h2>
                 <ul>
                     <li>
-                        <strong>Memcached Operator:</strong> Its a kubernetes controller build with kubebuilder.
+                        <strong>Memcached Operator:</strong> Developed a Kubernetes Operator in Go. Engineered a Kubernetes Operator to automate the deployment and management of Memcached clusters, enhancing scalability and automation within cloud environments.
+                        <ul>
+                            <li>Tools: Golang, Kubebuilder</li>
+                            <li>Custom Resource Definitions (CRD) Implementation: Extended Kubernetes API with CRDs for managing Memcached configurations, allowing users to define and adjust their caching strategies declaratively.</li>
+                        </ul>
                         <a href="https://github.com/sagoresarker/memcached-operator" target="_blank">GitHub</a>
                     </li>
                     <li>
-                        <strong>Task Queue:</strong> FInite State machine based task queue in golang
+                        <strong>Task Queue:</strong> Distributed Task Queue System in Golang
+                        <ul>
+                            <li>Task Coordination: Utilizes a coordinator service to manage and distribute tasks across multiple worker nodes.</li>
+                            <li>Dynamic Configuration: Supports dynamic configuration of the coordinator service port through command-line flags.</li>
+                            <li>Database Integration: Integrates with a database to fetch connection strings, facilitating task persistence and state management.</li>
+                            <li>Robust Task Handling: Capable of handling various task states such as queued, started, completed, and failed, ensuring comprehensive task lifecycle management.</li>
+                        </ul>
                         <a href="https://github.com/sagoresarker/task-queue" target="_blank">GitHub</a>
                     </li>
                     <li>
-                        <strong>Full Text Search:</strong> A Full text search engine which is scalabe for large data.
-                        <a href="https://github.com/sagoresarker/full-text-search-go" target="_blank">GitHub</a>
-                    </li>
-                    <li>
-                        <strong>URL Shortner :</strong> Url shortener service written in go
-                        <a href="https://github.com/sagoresarker/url-shortner-go" target="_blank">GitHub</a>
-                    </li>
-                    <li>
-                        <strong>Rate Limited Calculator:</strong> Implemented a rate limiter using Golang, echo 4, and Redis.
+                        <strong>Rate Limited Calculator:</strong> Rate-Limited Calculator Service Using Go and Redis
+                        <ul>
+                            <li>Rate Limiting: Implements a sliding window rate limiting algorithm to manage the number of requests a user can make within a specified time frame, using Redis for efficient storage and retrieval of request timestamps.</li>
+                            <li>RESTful API: Provides a REST API endpoint /calculate that supports various mathematical operations such as addition, subtraction, multiplication, division, modulo, power, and factorial.</li>
+                            <li>Error Handling: Robust error handling to manage and respond to issues such as rate limit exceedance, Redis connection failures, and invalid mathematical operations (like division by zero).</li>
+                            <li>Unit Testing: The project includes unit tests for critical components such as the rate limiter and the mathematical operations of the calculator.</li>
+                        </ul>
                         <a href="https://github.com/sagoresarker/rate-limited-calculator" target="_blank">GitHub</a>
                     </li>
                     <li>
-                        <strong>Recipe API:</strong> Developed a Recipe API using Django REST Framework, PostgreSQL, and Docker.
-                        <a href="https://github.com/sagoresarker/recipe-api" target="_blank">GitHub</a>
+                        <strong>Real-Time Event Processing System:</strong> Real-Time Event Processing System with Redis Pub/Sub in Go
+                        <ul>
+                            <li>Event-Driven Architecture: Utilizes the publish-subscribe pattern to handle real-time data processing, enhancing the system's responsiveness and scalability.</li>
+                            <li>Redis Integration: Leverages Redis as a message broker to efficiently distribute messages across different components of the application.</li>
+                            <li>Real-Time Notifications: Implements subscribers that listen to specific Redis channels for events like user creation or order updates, enabling real-time notifications and actions.</li>
+                        </ul>
+                        <a href="https://github.com/sagoresarker/real-time-event-processing" target="_blank">GitHub</a>
                     </li>
-                    <li>
-                        <strong>IMDB API Clone:</strong> Created an IMDB API clone with Django REST Framework and PostgreSQL.
-                        <a href="https://github.com/sagoresarker/imdb-api-clone" target="_blank">GitHub</a>
-                    </li>
-
                 </ul>
             </section>
         </main>
