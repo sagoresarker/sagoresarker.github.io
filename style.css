@@ -265,15 +265,21 @@ li::before {
 }
 
 .project h3 {
-
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 10px;
     padding-left: 0;
     width: 100%;
     font-size: 1.2em;  /* Match job h3 size */
     color: var(--primary-color);
+}
+
+.project h3::before {
+    content: "## ";
+    color: var(--accent-color);
+    font-size: 0.8em;
+    margin-right: 5px; /* Add some spacing between the "##" and the title */
+    line-height: 1; /* Ensure the pseudo-element has the same line height as the title */
 }
 
 /* Remove the border from project-content since it's now on the project div */
@@ -285,13 +291,12 @@ li::before {
 
 .github-link {
     font-size: 0.9em;
-    white-space: nowrap;
-    margin-left: 15px;
-    position: absolute;
-    padding-left: 15px;
+    white-space: normal;
+    margin-top: 5px;
     color: var(--primary-color); /* Change to primary color for visibility */
     text-decoration: none; /* Remove underline */
     transition: color 0.3s ease; /* Smooth transition for hover effect */
+    word-break: break-word; /* Allow the link to break to the next line if needed */
 }
 
 .github-link:hover {
@@ -324,6 +329,7 @@ li::before {
     content: "## ";
     color: var(--accent-color);
     font-size: 0.8em;
+    margin-right: 5px; /* Add some spacing between the "##" and the title */
 }
 
 /* Responsive adjustments */
