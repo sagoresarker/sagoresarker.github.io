@@ -4,129 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sagore Sarker - Backend Engineer</title>
-    <link rel="stylesheet" href="style.css">
+    <div id="welcome-banner" class="welcome-banner"></div>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Sagore Sarker</h1>
-            <p>Passionate Backend Engineer Focused on Scalable Distributed Systems</p>
-            <p>Dhaka, Bangladesh | sagoresarker.cse@gmail.com | (+880) 16263 04354</p>
-            <p>
-                <a href="https://github.com/sagoresarker" target="_blank">GitHub</a> |
-                <a href="https://linkedin.com/in/sagore-sarker/" target="_blank">LinkedIn</a> |
-                <a href="https://backendbyte.com" target="_blank">Blog</a> |
-                <a href="assets/sagoresarker-swe-cv.pdf" class="download-cv" download>Download CV</a>
-            </p>
-            <div class="gopher-image"></div>
-
-            <div class="tag-line"> I love Data Intensive Systems...</div>
-        </header>
+        <!-- Include header.html -->
+        <div include-html="layouts/header.html"></div>
 
         <main>
-            <section class="summary">
-                <h2>Professional Summary</h2>
-                <p>As a Backend Engineer, I specialize in architecting and optimizing data-intensive distributed systems that operate at scale. I design resilient backend solutions that excel in performance and fault tolerance, with a focus on building robust distributed architectures. My passion lies in tackling complex distributed computing challenges, from ensuring data consistency across nodes to optimizing system throughput in large-scale deployments.</p>
-            </section>
+            <!-- Include summary.html -->
+            <div include-html="components/summary.html"></div>
 
-            <section class="experience">
-                <h2>Professional Experience</h2>
-                <div class="job">
-                    <h3>Junior Backend Engineer</h3>
-                    <p class="job-info">Poridhi.io | Dec 2023 - Present | Dhaka, Bangladesh</p>
-                    <h4>DevOps Team</h4>
-                    <ul>
-                        <li>Developed and implemented comprehensive DevOps solutions for customer microservice applications, adhering to GitOps principles.</li>
-                        <li>Deployed all services on Kubernetes clusters, configured horizontal pod autoscaling, and managed cluster secrets from scratch on bare metal.</li>
-                        <li>Ensured robust CI/CD pipelines using on-premise solutions for continuous integration, maintaining security best practices.</li>
-                        <li>Utilized ArgoCD for continuous deployment, set up NGINX-Ingress for traffic management, and exposed services externally via Cloudflare Tunnel.</li>
-                    </ul>
-                    <h4>Engineering Team</h4>
-                    <ul>
-                        <li>Built a Kubernetes playground leveraging Firecracker microVMs and software-defined networking.</li>
-                        <li>Designed and maintained high-availability systems through a distributed architecture using gRPC.</li>
-                        <li>Focused on backend engineering, implementing scalable and resilient backend solutions.</li>
-                        <li>Developed and maintained a Pub/Sub architecture with Redis queues.</li>
-                        <li>Implemented both software and database level state machine-based systems.</li>
-                    </ul>
-                </div>
-            </section>
+            <!-- Include experience.html -->
+            <div include-html="components/experience.html"></div>
 
-            <section class="skills">
-                <h2>Technical Skills</h2>
-                <ul>
-                    <li><strong>Languages:</strong> Go, Python, Bash, C, C++</li>
-                    <li><strong>Databases:</strong> MySQL, PostgreSQL, MongoDB</li>
-                    <li><strong>Technologies:</strong> Kubernetes, Docker, Git, RabbitMQ, ArgoCD, NGINX, Prometheus, Grafana</li>
-                    <li><strong>Other:</strong> Data structures and algorithms, software-defined networking, distributed systems, microservices architecture, CI/CD pipelines, high availability systems, performance tuning, security best practices</li>
-                </ul>
-            </section>
+            <!-- Include skills.html -->
+            <div include-html="components/skills.html"></div>
 
-            <section class="projects">
-                <h2>Personal Projects</h2>
-
-                <div class="project">
-                    <h3>
-                        <a href="https://github.com/sagoresarker/memcached-operator" target="_blank" class="github-link">
-                            Kubernetes Memcached Operator using Golang and Kubebuilder
-                        </a>
-                    </h3>
-                    <div class="project-content">
-                        <ul>
-                            <li>Developed a Kubernetes Operator in Go. Engineered a Kubernetes Operator to automate the deployment and management of Memcached clusters, enhancing scalability and automation within cloud environments.</li>
-                            <li>Custom Resource Definitions (CRD) Implementation: Extended Kubernetes API with CRDs for managing Memcached configurations, allowing users to define and adjust their caching strategies declaratively.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="project">
-                    <h3>
-                        <a href="https://github.com/sagoresarker/task-queue" target="_blank" class="github-link">
-                            Distributed Task Queue System in Golang
-                        </a>
-                    </h3>
-                    <div class="project-content">
-                        <ul>
-                            <li>Task Coordination: Utilizes a coordinator service to manage and distribute tasks across multiple worker nodes.</li>
-                            <li>Dynamic Configuration: Supports dynamic configuration of the coordinator service port through command-line flags.</li>
-                            <li>Database Integration: Integrates with a database to fetch connection strings, facilitating task persistence and state management.</li>
-                            <li>Robust Task Handling: Capable of handling various task states such as queued, started, completed, and failed, ensuring comprehensive task lifecycle management.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="project">
-                    <h3>
-                        <a href="https://github.com/sagoresarker/rate-limited-calculator-golang" target="_blank" class="github-link">
-                            Rate-Limited Calculator Service Using Go and Redis
-                        </a>
-                    </h3>
-                    <div class="project-content">
-                        <ul>
-                            <li>Rate Limiting: Implements a sliding window rate limiting algorithm to manage the number of requests a user can make within a specified time frame, using Redis for efficient storage and retrieval of request timestamps.</li>
-                            <li>RESTful API: Provides a REST API endpoint /calculate that supports various mathematical operations such as addition, subtraction, multiplication, division, modulo, power, and factorial.</li>
-                            <li>Error Handling: Robust error handling to manage and respond to issues such as rate limit exceedance, Redis connection failures, and invalid mathematical operations (like division by zero).</li>
-                            <li>Unit Testing: The project includes unit tests for critical components such as the rate limiter and the mathematical operations of the calculator.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="project">
-                    <h3>
-                        <a href="https://github.com/sagoresarker/redis-pubsub-example-eda" target="_blank" class="github-link">
-                            Real-Time Event Processing System with Redis Pub/Sub in Go
-                        </a>
-                    </h3>
-                    <div class="project-content">
-                        <ul>
-                            <li>Event-Driven Architecture: Utilizes the publish-subscribe pattern to handle real-time data processing, enhancing the system's responsiveness and scalability.</li>
-                            <li>Redis Integration: Leverages Redis as a message broker to efficiently distribute messages across different components of the application.</li>
-                            <li>Real-Time Notifications: Implements subscribers that listen to specific Redis channels for events like user creation or order updates, enabling real-time notifications and actions.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+            <!-- Include projects.html -->
+            <div include-html="components/projects.html"></div>
         </main>
+
+        <!-- Include footer.html -->
+        <div include-html="layouts/footer.html"></div>
     </div>
+
+
+    <!-- <div id="welcome-popup" class="popup hidden">
+        <p id="welcome-message"></p>
+    </div> -->
+
+    <!-- Add the watermark elements
+    <div class="watermark">
+        <p><strong>Latest Commit Hash:</strong> <span id="latest-commit-hash"></span></p>
+        <p><strong>Last Build Time:</strong> <span id="last-build-time"></span></p>
+        <p><strong>Latest Commit Time:</strong> <span id="latest-commit-time"></span></p>
+    </div> -->
+
+    <!-- <script src="assets/js/github-info.js"></script> -->
+    <!-- <script src="assets/js/welcome-banner.js"></script> -->
+    <script src="assets/js/include-html.js"></script>
 </body>
 </html>
