@@ -1,49 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-http-version="1.1">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sagore Sarker - Backend Engineer</title>
-    <div id="welcome-banner" class="welcome-banner"></div>
+    <script>
+(function(){
+ var k='httpVersion',v=['0.9','1.0','1.1','2','3'],d='1.1';
+ try{ var s=localStorage.getItem(k); if(v.indexOf(s)!==-1) d=s; }catch(_){}
+ document.documentElement.setAttribute('data-http-version',d);
+})();
+    </script>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Include header.html -->
-        <div include-html="layouts/header.html"></div>
+    <div id="request-journey-overlay" class="request-journey-overlay" aria-hidden="true" style="display:none;" role="presentation"></div>
 
-        <main>
-            <!-- Include summary.html -->
-            <div include-html="components/summary.html"></div>
-
-            <!-- Include experience.html -->
-            <div include-html="components/experience.html"></div>
-
-            <!-- Include skills.html -->
-            <div include-html="components/skills.html"></div>
-
-            <!-- Include projects.html -->
-            <div include-html="components/projects.html"></div>
-        </main>
-
-        <!-- Include footer.html -->
-        <div include-html="layouts/footer.html"></div>
+    <div id="http-version-bar" class="http-version-bar">
+        <span>Protocol:</span>
+        <span id="http-version-note" class="http-version-note" aria-live="polite"></span>
     </div>
 
+    <div class="container">
+        <div class="container-inner">
+            <div class="protocol-decoration" aria-hidden="true">
+                <div class="protocol-block protocol-09">GET /</div>
+                <div class="protocol-block protocol-10">HTTP/1.0 200 OK<br>Content-Type: text/html; charset=utf-8</div>
+                <div class="protocol-block protocol-11">HTTP/1.1 200 OK<br>Connection: keep-alive · Chunked response</div>
+                <div class="protocol-block protocol-2">HTTP/2 · binary framing · multiplexed streams</div>
+                <div class="protocol-block protocol-3">HTTP/3 (QUIC) · UDP</div>
+            </div>
+            <div include-html="layouts/header.html"></div>
 
-    <!-- <div id="welcome-popup" class="popup hidden">
-        <p id="welcome-message"></p>
-    </div> -->
+            <main>
+                <div include-html="components/summary.html"></div>
+                <div include-html="components/experience.html"></div>
+                <div include-html="components/skills.html"></div>
+                <div include-html="components/projects.html"></div>
+            </main>
 
-    <!-- Add the watermark elements
-    <div class="watermark">
-        <p><strong>Latest Commit Hash:</strong> <span id="latest-commit-hash"></span></p>
-        <p><strong>Last Build Time:</strong> <span id="last-build-time"></span></p>
-        <p><strong>Latest Commit Time:</strong> <span id="latest-commit-time"></span></p>
-    </div> -->
+            <div include-html="layouts/footer.html"></div>
+        </div>
+    </div>
 
-    <!-- <script src="assets/js/github-info.js"></script> -->
-    <!-- <script src="assets/js/welcome-banner.js"></script> -->
     <script src="assets/js/include-html.js"></script>
+    <script src="assets/js/http-version-switcher.js"></script>
+    <script src="assets/js/request-journey-popup.js"></script>
 </body>
 </html>

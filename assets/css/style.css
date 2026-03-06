@@ -1,4 +1,6 @@
-:root {
+/* ========== Base (HTTP/1.1 default) ========== */
+:root,
+[data-http-version="1.1"] {
     --primary-color: #2c3e50;
     --secondary-color: #00ADD8;
     --background-color: #f9f9f9;
@@ -6,17 +8,67 @@
     --border-color: #e0e0e0;
     --accent-color: #5DC9E2;
     --code-bg: #f0f0f0;
+    --font-mono: 'Roboto Mono', 'Courier New', monospace;
+    --transition-theme: 0.35s ease;
 }
 
+/* HTTP/0.9 - Teletype, green/amber on black */
+[data-http-version="0.9"] {
+    --primary-color: #c4a000;
+    --secondary-color: #00ff41;
+    --background-color: #0a0a0a;
+    --text-color: #00ff41;
+    --border-color: #00ff4140;
+    --accent-color: #c4a000;
+    --code-bg: #1a1a1a;
+}
+
+/* HTTP/1.0 - Status line era, minimal */
+[data-http-version="1.0"] {
+    --primary-color: #2c3e50;
+    --secondary-color: #0066cc;
+    --background-color: #f5f5f0;
+    --text-color: #222;
+    --border-color: #0066cc60;
+    --accent-color: #0066cc;
+    --code-bg: #e8e8e0;
+}
+
+/* HTTP/2 - Binary framing, streams */
+[data-http-version="2"] {
+    --primary-color: #1a1a2e;
+    --secondary-color: #4a90d9;
+    --background-color: #16213e;
+    --text-color: #e8e8e8;
+    --border-color: #4a90d960;
+    --accent-color: #7b68ee;
+    --code-bg: #0f3460;
+}
+
+/* HTTP/3 - QUIC/UDP, modern */
+[data-http-version="3"] {
+    --primary-color: #0d1117;
+    --secondary-color: #58a6ff;
+    --background-color: #0d1117;
+    --text-color: #c9d1d9;
+    --border-color: #30363d;
+    --accent-color: #79c0ff;
+    --code-bg: #161b22;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: 'Roboto Mono', monospace;
+    font-family: var(--font-mono);
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
     margin: 0;
-    padding: 20px;
+    padding: 0;
     text-align: justify;
+    transition: background-color var(--transition-theme), color var(--transition-theme);
 }
 
 body::before {
@@ -26,20 +78,137 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-                repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(0, 0, 0, 0.05) 20px, rgba(0, 0, 0, 0.05) 40px);
     z-index: -1;
+    pointer-events: none;
 }
 
+[data-http-version="0.9"] body::before {
+    background: #0a0a0a;
+}
+
+[data-http-version="1.0"] body::before,
+[data-http-version="1.1"] body::before {
+    background: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)),
+                repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(0,0,0,0.04) 20px, rgba(0,0,0,0.04) 40px);
+}
+
+[data-http-version="2"] body::before {
+    background: radial-gradient(ellipse at top, #1a1a2e 0%, #16213e 100%);
+}
+
+[data-http-version="3"] body::before {
+    background: #0d1117;
+}
+
+/* Full-width layout */
 .container {
-    max-width: 900px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    transition: border-color var(--transition-theme), box-shadow var(--transition-theme);
+}
+
+.container-inner {
+    max-width: 1100px;
     margin: 0 auto;
-    background-color: white;
-    padding: 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 24px 32px 48px;
+    background-color: var(--background-color);
     border-left: 5px solid var(--secondary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     position: relative;
 }
+
+[data-http-version="0.9"] .container-inner {
+    box-shadow: 0 0 0 1px var(--border-color);
+}
+
+[data-http-version="2"] .container-inner,
+[data-http-version="3"] .container-inner {
+    background-color: transparent;
+    border-left-color: var(--accent-color);
+    box-shadow: none;
+}
+
+/* ========== Protocol-specific decoration (exact HTTP version differences) ========== */
+.protocol-decoration {
+    margin-bottom: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.protocol-block {
+    display: none;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    background: var(--code-bg);
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+[data-http-version="0.9"] .protocol-09 { display: block; }
+[data-http-version="1.0"] .protocol-10 { display: block; }
+[data-http-version="1.1"] .protocol-11 { display: block; }
+[data-http-version="2"] .protocol-2 { display: block; }
+[data-http-version="3"] .protocol-3 { display: block; }
+
+[data-http-version="0.9"] .protocol-09 {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+/* HTTP/1.1: sections as "chunks" (chunk boundary feel) */
+[data-http-version="1.1"] .summary,
+[data-http-version="1.1"] .experience,
+[data-http-version="1.1"] .skills,
+[data-http-version="1.1"] .projects {
+    position: relative;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-color);
+}
+[data-http-version="1.1"] .summary { border-top: none; padding-top: 0; }
+
+[data-http-version="1.1"] .summary h2::after,
+[data-http-version="1.1"] .experience h2::after,
+[data-http-version="1.1"] .skills h2::after,
+[data-http-version="1.1"] .projects h2::after {
+    content: " (chunk)";
+    font-size: 0.5em;
+    font-weight: normal;
+    opacity: 0.7;
+    color: var(--accent-color);
+}
+
+/* HTTP/2: stream IDs on sections */
+[data-http-version="2"] .summary h2::after { content: " [stream 1]"; }
+[data-http-version="2"] .experience h2::after { content: " [stream 3]"; }
+[data-http-version="2"] .skills h2::after { content: " [stream 5]"; }
+[data-http-version="2"] .projects h2::after { content: " [stream 7]"; }
+
+[data-http-version="2"] .summary h2::after,
+[data-http-version="2"] .experience h2::after,
+[data-http-version="2"] .skills h2::after,
+[data-http-version="2"] .projects h2::after {
+    font-size: 0.5em;
+    font-weight: normal;
+    opacity: 0.8;
+    color: var(--accent-color);
+}
+
+/* HTTP/1.0, 0.9, 3: no chunk/stream suffix on h2 */
+[data-http-version="1.0"] .summary h2::after,
+[data-http-version="1.0"] .experience h2::after,
+[data-http-version="1.0"] .skills h2::after,
+[data-http-version="1.0"] .projects h2::after,
+[data-http-version="0.9"] .summary h2::after,
+[data-http-version="0.9"] .experience h2::after,
+[data-http-version="0.9"] .skills h2::after,
+[data-http-version="0.9"] .projects h2::after,
+[data-http-version="3"] .summary h2::after,
+[data-http-version="3"] .experience h2::after,
+[data-http-version="3"] .skills h2::after,
+[data-http-version="3"] .projects h2::after { content: none; }
 
 header {
     border-bottom: 2px dashed var(--secondary-color);
@@ -64,9 +233,17 @@ header p {
     color: var(--text-color);
 }
 
+/* Assembly-style section addresses */
+.summary h2::before { content: "0x00401000 # "; }
+.experience h2::before { content: "0x00402000 # "; }
+.skills h2::before { content: "0x00403000 # "; }
+.projects h2::before { content: "0x00404000 # "; }
+
 h2::before {
-    content: "# ";
     color: var(--secondary-color);
+    font-size: 0.6em;
+    font-weight: normal;
+    opacity: 0.9;
 }
 
 h2 {
@@ -139,8 +316,9 @@ li {
 }
 
 li::before {
-    content: "$ ";
+    content: "PUSH ";
     color: var(--secondary-color);
+    font-size: 0.85em;
     position: absolute;
     left: -20px;
     font-weight: bold;
@@ -171,16 +349,19 @@ li::before {
 }
 
 .skills li::before {
-    content: "⚙️";
+    content: "MOV ";
+    color: var(--secondary-color);
+    font-size: 0.85em;
     position: absolute;
     left: 0;
 }
 
 .projects li::before {
-    content: "🚀";
+    content: "CALL ";
+    color: var(--secondary-color);
+    font-size: 0.85em;
     position: absolute;
     left: 0;
-    color: var(--background-color);
 }
 
 .code-block {
@@ -212,11 +393,11 @@ li::before {
 .tag-line {
     font-size: 1em; /* Corrected the spacing issue */
     font-style: italic;
-    color: red;
+    color: var(--accent-color);
     margin-top: 10px;
     padding: 10px 20px; /* Add padding for space inside the element */
     border-left: 5px solid var(--accent-color); /* Add a left border to mimic a quote */
-    background-color: #f9f9f9; /* Optional: Add a background color */
+    background-color: var(--code-bg);
     quotes: "“" "”" "‘" "’"; /* Define quote marks */
 }
 
@@ -248,13 +429,6 @@ li::before {
 .cursor::after {
     content: "|";
     animation: blink 1s infinite;
-}
-
-.job {
-    margin-bottom: 25px;
-    padding-left: 15px;
-    border-left: 3px solid var(--accent-color);
-    position: relative;
 }
 
 .project {
@@ -334,8 +508,8 @@ li::before {
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-    .container {
-        padding: 20px;
+    .container-inner {
+        padding: 20px 24px 40px;
     }
 
     header h1 {
@@ -361,12 +535,13 @@ li::before {
 }
 
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
+    .container-inner {
+        padding: 16px 20px 32px;
     }
 
-    .container {
-        padding: 15px;
+    .http-version-bar {
+        flex-wrap: wrap;
+        font-size: 0.75rem;
     }
 
     header h1 {
@@ -400,8 +575,8 @@ li::before {
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 10px;
+    .container-inner {
+        padding: 12px 16px 24px;
     }
 
     header h1 {
@@ -456,6 +631,21 @@ footer p {
     font-size: 1.2em;
 }
 
+.replay-journey-link {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--secondary-color);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.replay-journey-link:hover {
+    color: var(--accent-color);
+}
+
 .github-info {
     margin-top: 40px;
 }
@@ -507,3 +697,208 @@ footer p {
         padding: 5px;
     }
 } */
+
+/* ========== HTTP Version Switcher ========== */
+.http-version-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 12px;
+    padding: 8px 12px;
+    background: var(--code-bg);
+    border-bottom: 1px solid var(--border-color);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+
+.http-version-bar span {
+    margin-right: 8px;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.http-version-note {
+    order: 10;
+    margin-left: 0;
+    max-width: min(420px, 50vw);
+    font-size: 0.75rem;
+    opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+    .http-version-note {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 6px;
+        max-width: none;
+    }
+}
+
+.http-version-bar button {
+    font-family: inherit;
+    padding: 4px 10px;
+    border: 1px solid var(--border-color);
+    background: var(--background-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.http-version-bar button:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--background-color);
+}
+
+.http-version-bar button[aria-current="true"] {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--background-color);
+}
+
+/* ========== Request Journey Popup ========== */
+.request-journey-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: rj-fadeIn 0.3s ease;
+}
+
+.request-journey-overlay[aria-hidden="true"] {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+@keyframes rj-fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.request-journey-modal {
+    background: var(--code-bg);
+    border: 2px solid var(--secondary-color);
+    border-radius: 4px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-mono);
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
+    animation: rj-slideUp 0.35s ease;
+}
+
+@keyframes rj-slideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.request-journey-modal h3 {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    color: var(--secondary-color);
+}
+
+.request-journey-modal h3::before {
+    content: "";
+}
+
+.request-journey-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.request-journey-step {
+    padding: 20px;
+    flex: 1;
+    min-height: 120px;
+}
+
+.request-journey-step-title {
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    margin-bottom: 8px;
+}
+
+.request-journey-step-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+.request-journey-step-detail {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+
+.request-journey-footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.request-journey-footer button {
+    font-family: inherit;
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    background: var(--background-color);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.request-journey-footer button:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.request-journey-footer .rj-skip {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--background-color);
+}
+
+.request-journey-progress {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.request-journey-progress span {
+    width: 24px;
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 2px;
+    transition: background 0.2s;
+}
+
+.request-journey-progress span.active {
+    background: var(--secondary-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .request-journey-overlay,
+    .request-journey-modal {
+        animation: none;
+    }
+}
