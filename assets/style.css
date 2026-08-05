@@ -1,0 +1,226 @@
+/* sagoresarker.me */
+
+:root {
+  --ink:    #17191c;
+  --body:   #3a3f46;
+  --muted:  #6d747d;
+  --rule:   #e3e5e9;
+  --accent: #1a3c6e;
+  --mark:   #f2f4f7;
+  --bg:     #ffffff;
+
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+          "Liberation Mono", monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 5rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(26, 60, 110, 0.3);
+}
+a:hover { border-bottom-color: currentColor; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+/* ---- masthead ------------------------------------------------------------ */
+
+.masthead { margin-bottom: 2.5rem; }
+
+h1 {
+  margin: 0;
+  font-size: 2.1rem;
+  line-height: 1.15;
+  letter-spacing: -0.021em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* The first line is about the work, not the job title. */
+.lede {
+  margin: 0.55rem 0 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.15rem;
+  margin: 1.15rem 0 0;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+/* ---- sections ------------------------------------------------------------ */
+
+section { margin-bottom: 2.75rem; }
+section:last-of-type { margin-bottom: 0; }
+
+h2 {
+  margin: 0 0 1.4rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.775rem;
+  font-weight: 600;
+  letter-spacing: 0.115em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.intro { margin: 0; font-size: 1.0625rem; }
+.intro + .intro { margin-top: 0.9rem; }
+
+/* ---- entries ------------------------------------------------------------- */
+
+.entry { margin-bottom: 2rem; }
+.entry:last-child { margin-bottom: 0; }
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+h3 {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+h3 a { color: inherit; border-bottom-color: var(--rule); }
+h3 a:hover { color: var(--accent); border-bottom-color: currentColor; }
+
+.dates {
+  flex: none;
+  font-size: 0.875rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.stack {
+  margin: 0.2rem 0 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.meta { margin: 0.1rem 0 0.6rem; font-size: 0.9375rem; color: var(--muted); }
+
+.entry p { margin: 0 0 0.7rem; }
+.entry p:last-child { margin-bottom: 0; }
+
+.entry ul { margin: 0; padding-left: 1.15rem; }
+.entry li { margin-bottom: 0.45rem; }
+.entry li:last-child { margin-bottom: 0; }
+.entry li::marker { color: var(--muted); }
+
+/* The one line that says what was actually difficult. This is the line a
+   systems reader stops on, so it gets its own treatment. */
+.hard {
+  margin: 0.7rem 0 0;
+  padding: 0.55rem 0.85rem;
+  background: var(--mark);
+  border-left: 2px solid var(--accent);
+  font-size: 0.9375rem;
+  border-radius: 0 2px 2px 0;
+}
+.hard b { color: var(--ink); font-weight: 600; }
+
+/* ---- writing ------------------------------------------------------------- */
+
+.writing { list-style: none; margin: 0; padding: 0; }
+.writing li { margin-bottom: 0.9rem; }
+.writing li:last-child { margin-bottom: 0; }
+.writing .when { display: block; font-size: 0.8125rem; color: var(--muted); }
+
+/* ---- skills -------------------------------------------------------------- */
+
+.skills {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 0.65rem 1.5rem;
+  margin: 0;
+}
+.skills dt { font-size: 0.9375rem; font-weight: 600; color: var(--ink); }
+.skills dd { margin: 0; }
+
+/* ---- footer -------------------------------------------------------------- */
+
+footer {
+  margin-top: 3.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+footer p { margin: 0; }
+
+/* ---- narrow -------------------------------------------------------------- */
+
+@media (max-width: 620px) {
+  main { padding: 3rem 1.25rem 3.5rem; }
+  h1 { font-size: 1.75rem; }
+  .lede { font-size: 1.03rem; }
+  .entry-head { display: block; }
+  .dates { display: block; margin-top: 0.15rem; }
+  .skills { grid-template-columns: 1fr; gap: 0.1rem; }
+  .skills dd { margin-bottom: 0.75rem; }
+}
+
+/* ---- dark ---------------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink:    #f0f2f5;
+    --body:   #c3c8d0;
+    --muted:  #8b939f;
+    --rule:   #2a2e35;
+    --accent: #7fa8e2;
+    --mark:   #1c2027;
+    --bg:     #14161a;
+  }
+  a { border-bottom-color: rgba(127, 168, 226, 0.36); }
+}
+
+/* ---- print --------------------------------------------------------------- */
+
+@page { margin: 16mm; }
+
+@media print {
+  :root {
+    --ink: #000; --body: #1a1a1a; --muted: #444; --rule: #bbb;
+    --accent: #000; --mark: #f4f4f4; --bg: #fff;
+  }
+  body { font-size: 10pt; line-height: 1.45; }
+  main { max-width: none; padding: 0; }
+  a { border: 0; }
+  section { margin-bottom: 1.4rem; }
+  .entry { margin-bottom: 1rem; break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  .hard { border-left-width: 1px; }
+  footer { display: none; }
+}

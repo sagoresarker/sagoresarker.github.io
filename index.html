@@ -1,50 +1,312 @@
-<!DOCTYPE html>
-<html lang="en" data-http-version="1.1">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sagore Sarker - Backend Engineer</title>
-    <script>
-(function(){
- var k='httpVersion',v=['0.9','1.0','1.1','2','3'],d='1.1';
- try{ var s=localStorage.getItem(k); if(v.indexOf(s)!==-1) d=s; }catch(_){}
- document.documentElement.setAttribute('data-http-version',d);
-})();
-    </script>
-    <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sagore Sarker, Infrastructure Engineer</title>
+<meta name="description" content="Sagore Sarker builds infrastructure software: Firecracker microVMs, software-defined networking with OVN/OVS, authoritative DNS with DNSSEC, and PostgreSQL control planes. Mostly Go. Dhaka, Bangladesh.">
+<meta name="author" content="Sagore Sarker">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Sagore Sarker, Infrastructure Engineer">
+<meta property="og:description" content="I build infrastructure software: microVMs, software-defined networking, database control planes. Mostly Go.">
+<meta property="og:url" content="https://sagoresarker.me/">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://sagoresarker.me/">
+<link rel="stylesheet" href="assets/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Sagore Sarker",
+  "jobTitle": "DevOps Engineer II",
+  "url": "https://sagoresarker.me/",
+  "email": "mailto:sagoresarker.cse@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" },
+  "worksFor": { "@type": "Organization", "name": "Lotus's (CP Axtra)" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Jashore University of Science and Technology" },
+  "knowsAbout": ["Go", "Firecracker", "microVMs", "Kubernetes operators", "OVN", "Open vSwitch", "BGP", "DNSSEC", "PostgreSQL", "distributed systems"],
+  "sameAs": ["https://github.com/sagoresarker", "https://www.linkedin.com/in/sagore-sarker/", "https://backendbyte.com"]
+}
+</script>
 </head>
+
 <body>
-    <div id="request-journey-overlay" class="request-journey-overlay" aria-hidden="true" style="display:none;" role="presentation"></div>
+<main>
 
-    <div id="http-version-bar" class="http-version-bar">
-        <span>Protocol:</span>
-        <span id="http-version-note" class="http-version-note" aria-live="polite"></span>
-    </div>
+  <header class="masthead">
+    <h1>Sagore Sarker</h1>
+    <p class="lede">
+      I build infrastructure software: microVMs, software-defined networking,
+      database control planes. Mostly Go.
+    </p>
+    <p class="contact">
+      <span>Dhaka, Bangladesh</span>
+      <a href="mailto:sagoresarker.cse@gmail.com">sagoresarker.cse@gmail.com</a>
+      <a href="https://github.com/sagoresarker" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/sagore-sarker/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://backendbyte.com" target="_blank" rel="noopener noreferrer">Blog</a>
+    </p>
+  </header>
 
-    <div class="container">
-        <div class="container-inner">
-            <div class="protocol-decoration" aria-hidden="true">
-                <div class="protocol-block protocol-09">GET /</div>
-                <div class="protocol-block protocol-10">HTTP/1.0 200 OK<br>Content-Type: text/html; charset=utf-8</div>
-                <div class="protocol-block protocol-11">HTTP/1.1 200 OK<br>Connection: keep-alive · Chunked response</div>
-                <div class="protocol-block protocol-2">HTTP/2 · binary framing · multiplexed streams</div>
-                <div class="protocol-block protocol-3">HTTP/3 (QUIC) · UDP</div>
-            </div>
-            <div include-html="layouts/header.html"></div>
+  <section>
+    <p class="intro">
+      Currently a DevOps Engineer II at Lotus's (CP Axtra), working remotely from
+      Dhaka, where I write Kubernetes controllers and operators in Go and run
+      production across AWS, Tencent Cloud and Alibaba Cloud. Before that, SRE at
+      Pathao, and a backend engineer at Poridhi.io, where we built a small
+      public cloud on bare metal: a Go control plane provisioning Firecracker
+      microVMs, multi-tenant SDN over OVN/OVS, and BGP/ECMP anycast.
+    </p>
+    <p class="intro">
+      Outside work I build the same kind of thing: an authoritative DNS server,
+      a PostgreSQL control plane, a sandbox that assumes the code it runs is
+      hostile.
+    </p>
+  </section>
 
-            <main>
-                <div include-html="components/summary.html"></div>
-                <div include-html="components/experience.html"></div>
-                <div include-html="components/skills.html"></div>
-                <div include-html="components/projects.html"></div>
-            </main>
+  <section>
+    <h2>Selected work</h2>
 
-            <div include-html="layouts/footer.html"></div>
-        </div>
-    </div>
+    <article class="entry">
+      <div class="entry-head">
+        <!-- The repo is private, so a link here 404s for everyone but you.
+             Re-enable once it is public:
+             <a href="https://github.com/sagoresarker/runbox" target="_blank" rel="noopener noreferrer">runbox</a> -->
+        <h3>runbox</h3>
+        <span class="dates">since Aug 2026</span>
+      </div>
+      <p class="stack">Go · Docker · PostgreSQL</p>
+      <p>
+        The hosted sandbox worker behind
+        <a href="https://runtimelab.io" target="_blank" rel="noopener noreferrer">runtimelab</a>.
+        It executes submitted code
+        on my own hardware on the assumption that the code is hostile: no
+        database credentials, no repository access, no user secrets anywhere in
+        the blast radius. Every job runs in a container with no network and hard
+        limits on CPU, memory, process count and wall-clock time.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> a lease with a timeout is not a lock. A worker that
+        is paused by GC, by CPU starvation, by a partition, is not dead, and will
+        happily finish a job another worker has already taken. Jobs are claimed
+        under a monotonic fencing epoch that Postgres enforces on every write, so
+        a stale worker's writes affect zero rows instead of corrupting the run.
+      </p>
+    </article>
 
-    <script src="assets/js/include-html.js"></script>
-    <script src="assets/js/http-version-switcher.js"></script>
-    <script src="assets/js/request-journey-popup.js"></script>
+    <article class="entry">
+      <div class="entry-head">
+        <!-- gatecraft.net is registered and on Cloudflare nameservers but has no
+             A record, so nothing is served. The repo is private too. Re-enable
+             whichever lands first:
+             <a href="https://gatecraft.net" target="_blank" rel="noopener noreferrer">gatecraft</a> -->
+        <h3>gatecraft</h3>
+        <span class="dates">since Mar 2026</span>
+      </div>
+      <p class="stack">Go · PostgreSQL · Redis · TimescaleDB</p>
+      <p>
+        Five cooperating Go services (API, reverse proxy, authoritative DNS,
+        uptime monitor, worker) covering what a small site actually needs from a
+        web infrastructure provider. The proxy runs a full WAF (Coraza with the
+        OWASP core rules), GeoIP blocking, Redis Lua sliding-window rate limiting
+        and automatic Let's Encrypt certificates through CertMagic.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> the DNS server is written from the wire format up,
+        in pure Go, with DNSSEC signing on ECDSA P-256, chosen over RSA because
+        the signatures still fit a UDP response. Three-tier caching and response
+        rate limiting to blunt amplification.
+      </p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3><a href="https://sagoresarker.github.io/pgfleet/" target="_blank" rel="noopener noreferrer">pgfleet</a></h3>
+        <span class="dates">since Jun 2026</span>
+      </div>
+      <p class="stack">Go · Next.js · pgBackRest · PgCat</p>
+      <p>
+        A self-hosted PostgreSQL control plane, roughly an open-source RDS. It
+        provisions isolated container-based Postgres instances through the Docker
+        Engine API, with a Go backend on chi and pgx and a management console.
+        High availability through streaming replicas with read/write routing via
+        PgCat. Written test-first, 78% coverage.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> point-in-time recovery is only real if the WAL chain
+        is unbroken, so backups are scheduled to S3 or MinIO through pgBackRest
+        <em>and verified</em>. A restore you have never tested is not a backup.
+      </p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3><a href="https://runtimelab.io" target="_blank" rel="noopener noreferrer">runtimelab</a></h3>
+        <span class="dates">since Jul 2026</span>
+      </div>
+      <p class="stack">Go · Next.js · PostgreSQL · Docker</p>
+      <p>
+        A self-hostable "build your own X" platform: 464 staged challenges across
+        5 languages. The Go backend does GitHub OAuth, hashed sessions, per-user
+        runner tokens, long-poll job dispatch, SSE log streaming and git
+        smart-HTTP hosting with push-to-test.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> execution works like a GitLab runner: an agent on
+        the learner's own machine polls for jobs and runs them in Docker against
+        checksum-pinned test suites. The server never executes untrusted code,
+        and hosting cost stays flat as usage grows.
+      </p>
+    </article>
+
+    <p class="meta">
+      Earlier work on <a href="https://github.com/sagoresarker" target="_blank" rel="noopener noreferrer">GitHub</a>: a
+      Memcached operator built with Kubebuilder, a finite-state-machine task
+      queue, a sliding-window rate limiter in Redis.
+    </p>
+  </section>
+
+  <section>
+    <h2>Writing</h2>
+    <ul class="writing">
+      <!-- Add each post here as it lands. Phrase the line as the claim, not the
+           topic. "a lease with a timeout is not a lock" beats "on locking".
+      <li>
+        <a href="https://backendbyte.com/..." target="_blank" rel="noopener noreferrer">Fencing epochs: why my sandbox worker can't double-run a job</a>
+        <span class="when">September 2026</span>
+      </li>
+      -->
+      <li>
+        I write about infrastructure and systems work at
+        <a href="https://backendbyte.com" target="_blank" rel="noopener noreferrer">backendbyte.com</a>: DNS and DNSSEC,
+        overlay networking, microVMs, and Postgres internals.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Experience</h2>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3>DevOps Engineer II, Lotus's (CP Axtra)</h3>
+        <span class="dates">Jan 2026 - Present</span>
+      </div>
+      <p class="meta">Bangkok, Thailand (remote)</p>
+      <ul>
+        <li>Built components of an internal developer platform: Kubernetes
+          controllers and operators in Go for ArgoCD RBAC automation, resource
+          reconciliation and platform-level access management. Extended ArgoCD
+          with GitOps application lifecycle features and ran multi-environment
+          deployments through ArgoCD and Helm.</li>
+        <li>Ran production infrastructure across AWS, Tencent Cloud and Alibaba
+          Cloud. Designed cross-cloud site-to-site VPN connectivity and executed
+          production RDS migrations with validated backup chains.</li>
+        <li>Designed an internal logging platform handling petabyte-scale logs.</li>
+        <li>Owned the SSL/TLS certificate lifecycle across enterprise platforms
+          on AWS Certificate Manager.</li>
+        <li>Integrated Authentik for centralized IAM, deployed NetBird zero-trust
+          VPN for the engineering teams, and maintained Jenkins pipelines for
+          multi-environment releases.</li>
+      </ul>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3>Site Reliability Engineer, Pathao Ltd</h3>
+        <span class="dates">Dec 2024 - Dec 2025</span>
+      </div>
+      <p class="meta">Dhaka, Bangladesh</p>
+      <ul>
+        <li>Architected and tuned the TURN, signalling and WebSocket
+          infrastructure behind a real-time internal service, up to 500,000
+          concurrent connections.</li>
+        <li>Wrote the Terraform for GCP: provisioning, scaling and lifecycle
+          management across environments.</li>
+        <li>Built and maintained GitLab CI/CD for a large monorepo, deploying to
+          several environments with Helm.</li>
+        <li>Wrote custom Kong API Gateway plugins where the gateway did not do
+          what we needed.</li>
+        <li>Built Grafana dashboards with anomaly alerting, and worked production
+          incidents, failed deploys, slow pipelines and network problems.</li>
+      </ul>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3>Backend Engineer, Poridhi.io</h3>
+        <span class="dates">Dec 2023 - Nov 2024</span>
+      </div>
+      <p class="meta">Dhaka, Bangladesh</p>
+      <ul>
+        <li>Helped build a public cloud from scratch on bare metal: a Go control
+          plane provisioning Firecracker microVMs, multi-tenant SDN over OVN/OVS
+          with Geneve, and BGP/ECMP anycast for service exposure.</li>
+        <li>Built a Kubernetes playground on Firecracker microVMs with
+          software-defined networking, for hands-on labs.</li>
+        <li>Provisioned and ran bare-metal Kubernetes end to end: horizontal pod
+          autoscaling, secrets, NGINX-Ingress, and Cloudflare Tunnel for external
+          access.</li>
+        <li>Set up GitOps CI/CD for customer microservices with on-premise CI and
+          ArgoCD.</li>
+        <li>Designed highly available backends with gRPC, Redis-backed Pub/Sub
+          queues and state machines at both the application and database level.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section>
+    <h2>Tools</h2>
+    <dl class="skills">
+      <dt>Languages</dt>
+      <dd>Go, Python, Bash, C++</dd>
+
+      <dt>Systems</dt>
+      <dd>Firecracker, Cloud Hypervisor, Docker, Linux, containers and sandboxing</dd>
+
+      <dt>Networking</dt>
+      <dd>OVN/OVS, Geneve, BGP and ECMP with GoBGP, Envoy and xDS, WireGuard,
+        gRPC, DNS and DNSSEC</dd>
+
+      <dt>Orchestration</dt>
+      <dd>Kubernetes, controller-runtime and Kubebuilder, Helm, ArgoCD, Terraform,
+        Ansible, NGINX, Kong</dd>
+
+      <dt>Data</dt>
+      <dd>PostgreSQL, pgBackRest, PgCat, MySQL, MongoDB, Redis, etcd, AWS SQS,
+        Google Pub/Sub</dd>
+
+      <dt>Clouds</dt>
+      <dd>AWS, Google Cloud Platform, Alibaba Cloud, Tencent Cloud, bare metal</dd>
+
+      <dt>Observability</dt>
+      <dd>Prometheus, Grafana, OpenTelemetry, GitLab CI, Jenkins</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <article class="entry">
+      <div class="entry-head">
+        <h3>B.Sc. in Computer Science and Engineering</h3>
+        <span class="dates">2019 - 2024</span>
+      </div>
+      <p class="meta">Jashore University of Science and Technology, Jashore, Bangladesh</p>
+    </article>
+  </section>
+
+  <footer>
+    <p>
+      <a href="mailto:sagoresarker.cse@gmail.com">Email</a> ·
+      <a href="https://github.com/sagoresarker" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/sagore-sarker/" target="_blank" rel="noopener noreferrer">LinkedIn</a> ·
+      <a href="https://backendbyte.com" target="_blank" rel="noopener noreferrer">backendbyte.com</a>
+    </p>
+  </footer>
+
+</main>
 </body>
 </html>
