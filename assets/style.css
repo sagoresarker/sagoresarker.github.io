@@ -115,6 +115,11 @@ h2 {
 .intro { margin: 0; font-size: 1.0625rem; }
 .intro + .intro { margin-top: 0.9rem; }
 
+/* Employers carry weight in a paragraph that is otherwise a wall of prose, so
+   they are the one thing a skimming reader should catch. */
+.org { font-weight: 600; color: var(--ink); border-bottom-color: var(--rule); }
+.org:hover { color: var(--accent); border-bottom-color: currentColor; }
+
 /* ---- entries ------------------------------------------------------------- */
 
 .entry { margin-bottom: 2rem; }
