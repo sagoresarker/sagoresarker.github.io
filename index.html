@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sagore Sarker, Infrastructure Engineer</title>
-<meta name="description" content="Sagore Sarker builds infrastructure software: Firecracker microVMs, software-defined networking with OVN/OVS, authoritative DNS with DNSSEC, and PostgreSQL control planes. Mostly Go. Dhaka, Bangladesh.">
+<meta name="description" content="Sagore Sarker builds infrastructure software: Firecracker and Cloud Hypervisor microVMs, software-defined networking with Open Virtual Network and Open vSwitch, authoritative DNS with DNSSEC, and PostgreSQL control planes. Mostly Go. Dhaka, Bangladesh.">
 <meta name="author" content="Sagore Sarker">
 
 <meta property="og:type" content="profile">
@@ -27,7 +27,7 @@
   "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" },
   "worksFor": { "@type": "Organization", "name": "Lotus's (CP Axtra)" },
   "alumniOf": { "@type": "CollegeOrUniversity", "name": "Jashore University of Science and Technology" },
-  "knowsAbout": ["Go", "Firecracker", "microVMs", "Kubernetes operators", "OVN", "Open vSwitch", "BGP", "DNSSEC", "PostgreSQL", "distributed systems"],
+  "knowsAbout": ["Go", "Firecracker", "Cloud Hypervisor", "microVMs", "Kubernetes operators", "Open Virtual Network", "Open vSwitch", "BGP", "DNSSEC", "PostgreSQL", "distributed systems"],
   "sameAs": ["https://github.com/sagoresarker", "https://www.linkedin.com/in/sagore-sarker/", "https://backendbyte.com"]
 }
 </script>
@@ -63,8 +63,9 @@
       and a backend engineer at
       <a class="org" href="https://poridhi.io" target="_blank" rel="noopener noreferrer">Poridhi.io</a>,
       where we built a public cloud that serves real customers: a Go control
-      plane provisioning Firecracker microVMs, multi-tenant SDN over OVN/OVS,
-      and BGP/ECMP anycast.
+      plane provisioning hardware-isolated microVMs, multi-tenant
+      software-defined networking, and the routing layer that keeps customer
+      traffic reaching it.
     </p>
     <p class="intro">
       Outside work I build the same kind of thing: an authoritative DNS server,
@@ -249,10 +250,11 @@
       <p class="meta">Dhaka, Bangladesh</p>
       <ul>
         <li>Helped build a public cloud from scratch, serving real customers: a Go
-          control plane provisioning Firecracker microVMs, multi-tenant SDN over
-          OVN/OVS with Geneve, and BGP/ECMP anycast for service exposure.</li>
-        <li>Built a Kubernetes playground on Firecracker microVMs with
-          software-defined networking, for hands-on labs.</li>
+          control plane provisioning hardware-isolated microVMs, multi-tenant
+          software-defined networking, and highly available routing that keeps
+          customer workloads reachable.</li>
+        <li>Built a Kubernetes playground on microVMs with software-defined
+          networking, for hands-on labs.</li>
         <li>Provisioned and ran bare-metal Kubernetes end to end: horizontal pod
           autoscaling, secrets, NGINX-Ingress, and Cloudflare Tunnel for external
           access.</li>
@@ -271,11 +273,12 @@
       <dd>Go, Python, Bash, C++</dd>
 
       <dt>Systems</dt>
-      <dd>Firecracker, Cloud Hypervisor, Docker, Linux, containers and sandboxing</dd>
+      <dd>Firecracker, Cloud Hypervisor, KVM, microVMs, Docker and the Docker
+        Engine API, Linux, cgroups and namespaces, containers and sandboxing</dd>
 
       <dt>Networking</dt>
-      <dd>OVN/OVS, Geneve, BGP and ECMP with GoBGP, Envoy and xDS, WireGuard,
-        gRPC, DNS and DNSSEC</dd>
+      <dd>Open Virtual Network, Open vSwitch, Geneve, BGP and ECMP with GoBGP,
+        Envoy and xDS, WireGuard, gRPC, DNS and DNSSEC</dd>
 
       <dt>Orchestration</dt>
       <dd>Kubernetes, controller-runtime and Kubebuilder, Helm, ArgoCD, Terraform,

@@ -108,8 +108,8 @@ h2 {
   -webkit-hyphens: auto;
 }
 
-/* Never break these across a line: a hyphenated OVN/OVS or pgBackRest reads as
-   a typo rather than a line break. */
+/* Never break these across a line: a hyphenated Open vSwitch or pgBackRest reads
+   as a typo rather than a line break. */
 .stack, code, tt, a[href^="http"] { hyphens: none; -webkit-hyphens: none; }
 
 .intro { margin: 0; font-size: 1.0625rem; }
