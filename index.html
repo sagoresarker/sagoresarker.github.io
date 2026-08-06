@@ -106,20 +106,19 @@
 
     <article class="entry">
       <div class="entry-head">
-        <!-- gatecraft.net is registered and on Cloudflare nameservers but has no
-             A record, so nothing is served. The repo is private too. Re-enable
-             whichever lands first:
-             <a href="https://gatecraft.net" target="_blank" rel="noopener noreferrer">gatecraft</a> -->
-        <h3>gatecraft</h3>
+        <h3><a href="https://gatecraft.net" target="_blank" rel="noopener noreferrer">gatecraft</a></h3>
         <span class="dates">since Mar 2026</span>
       </div>
-      <p class="stack">Go · PostgreSQL · Redis · TimescaleDB</p>
+      <p class="stack">Go · PostgreSQL · Redis · TimescaleDB · Temporal</p>
       <p>
         Five cooperating Go services (API, reverse proxy, authoritative DNS,
         uptime monitor, worker) covering what a small site actually needs from a
         web infrastructure provider. The proxy runs a full WAF (Coraza with the
         OWASP core rules), GeoIP blocking, Redis Lua sliding-window rate limiting
-        and automatic Let's Encrypt certificates through CertMagic.
+        and automatic Let's Encrypt certificates through CertMagic. The
+        long-running work behind all of it — scheduled checks, certificate
+        renewal — runs as Temporal workflows, so a restart resumes where it left
+        off instead of starting the job over.
       </p>
       <p class="hard">
         <b>The hard part:</b> the DNS server is written from the wire format up,
@@ -281,8 +280,8 @@
         Envoy and xDS, WireGuard, gRPC, DNS and DNSSEC</dd>
 
       <dt>Orchestration</dt>
-      <dd>Kubernetes, controller-runtime and Kubebuilder, Helm, ArgoCD, Terraform,
-        Ansible, NGINX, Kong</dd>
+      <dd>Kubernetes, controller-runtime and Kubebuilder, Temporal, Helm, ArgoCD,
+        Terraform, Ansible, NGINX, Kong</dd>
 
       <dt>Data</dt>
       <dd>PostgreSQL, pgBackRest, PgCat, MySQL, MongoDB, Redis, etcd, AWS SQS,
