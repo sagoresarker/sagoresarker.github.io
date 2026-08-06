@@ -94,6 +94,24 @@ h2 {
   color: var(--muted);
 }
 
+/* Body copy is justified. Hyphenation is not optional here: justifying without
+   it opens rivers of white space between words, especially around the long
+   technical terms this page is full of. */
+.intro,
+.entry > p,
+.entry li,
+.skills dd,
+.writing li,
+.meta {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Never break these across a line: a hyphenated OVN/OVS or pgBackRest reads as
+   a typo rather than a line break. */
+.stack, code, tt, a[href^="http"] { hyphens: none; -webkit-hyphens: none; }
+
 .intro { margin: 0; font-size: 1.0625rem; }
 .intro + .intro { margin-top: 0.9rem; }
 
@@ -193,6 +211,12 @@ footer p { margin: 0; }
   .dates { display: block; margin-top: 0.15rem; }
   .skills { grid-template-columns: 1fr; gap: 0.1rem; }
   .skills dd { margin-bottom: 0.75rem; }
+
+  /* At phone measure a justified line is only ~40 characters, which is too few
+     for the spacing to stay even. Ragged right is the better reading. */
+  .intro, .entry > p, .entry li, .skills dd, .writing li, .meta {
+    text-align: left;
+  }
 }
 
 /* ---- print --------------------------------------------------------------- */
