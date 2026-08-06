@@ -1,13 +1,17 @@
 /* sagoresarker.me */
 
 :root {
+  /* The page is light for everyone. Without this a browser in dark mode still
+     paints its own scrollbars and form controls dark against it. */
+  color-scheme: light;
+
   --ink:    #17191c;
   --body:   #3a3f46;
   --muted:  #6d747d;
-  --rule:   #e3e5e9;
+  --rule:   #e6e3dd;
   --accent: #1a3c6e;
-  --mark:   #f2f4f7;
-  --bg:     #ffffff;
+  --mark:   #f2efe9;   /* a tint of the page, not a grey box laid on top of it */
+  --bg:     #fbfaf8;   /* off-white: less glare than #fff, still reads as white */
 
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
           "Helvetica Neue", Arial, sans-serif;
@@ -189,21 +193,6 @@ footer p { margin: 0; }
   .dates { display: block; margin-top: 0.15rem; }
   .skills { grid-template-columns: 1fr; gap: 0.1rem; }
   .skills dd { margin-bottom: 0.75rem; }
-}
-
-/* ---- dark ---------------------------------------------------------------- */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ink:    #f0f2f5;
-    --body:   #c3c8d0;
-    --muted:  #8b939f;
-    --rule:   #2a2e35;
-    --accent: #7fa8e2;
-    --mark:   #1c2027;
-    --bg:     #14161a;
-  }
-  a { border-bottom-color: rgba(127, 168, 226, 0.36); }
 }
 
 /* ---- print --------------------------------------------------------------- */
