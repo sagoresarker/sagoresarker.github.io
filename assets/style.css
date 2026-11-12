@@ -29,16 +29,25 @@ body {
   color: var(--body);
   font-family: var(--sans);
   font-size: 16px;
-  line-height: 1.62;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+/* Wide enough on a laptop that entries don't turn into long narrow columns,
+   still short enough that a line of prose stays readable. */
 main {
-  max-width: 46rem;
+  width: 100%;
+  max-width: 58rem;
   margin: 0 auto;
-  padding: 4.5rem 1.5rem 5rem;
+  padding: 4rem 2rem 5rem;
 }
+@media (min-width: 1440px) {
+  main { max-width: 64rem; }
+}
+
+/* Long emails and URLs must wrap rather than push the page sideways on phones. */
+a, .stack { overflow-wrap: anywhere; }
 
 a {
   color: var(--accent);
@@ -50,7 +59,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
 
 /* ---- masthead ------------------------------------------------------------ */
 
-.masthead { margin-bottom: 2.5rem; }
+.masthead { margin-bottom: 2rem; }
 
 h1 {
   margin: 0;
@@ -80,7 +89,7 @@ h1 {
 
 /* ---- sections ------------------------------------------------------------ */
 
-section { margin-bottom: 2.75rem; }
+section { margin-bottom: 2.5rem; }
 section:last-of-type { margin-bottom: 0; }
 
 h2 {
@@ -94,18 +103,15 @@ h2 {
   color: var(--muted);
 }
 
-/* Body copy is justified. Hyphenation is not optional here: justifying without
-   it opens rivers of white space between words, especially around the long
-   technical terms this page is full of. */
+/* Body copy is ragged right. Justified text opened wide gaps between words
+   around the long technical terms this page is full of. */
 .intro,
 .entry > p,
 .entry li,
 .skills dd,
 .writing li,
 .meta {
-  text-align: justify;
-  hyphens: auto;
-  -webkit-hyphens: auto;
+  text-align: left;
 }
 
 /* Never break these across a line: a hyphenated Open vSwitch or pgBackRest reads
@@ -113,7 +119,7 @@ h2 {
 .stack, code, tt, a[href^="http"] { hyphens: none; -webkit-hyphens: none; }
 
 .intro { margin: 0; font-size: 1.0625rem; }
-.intro + .intro { margin-top: 0.9rem; }
+.intro + .intro { margin-top: 0.6rem; }
 
 /* Employers carry weight in a paragraph that is otherwise a wall of prose, so
    they are the one thing a skimming reader should catch. */
@@ -157,18 +163,18 @@ h3 a:hover { color: var(--accent); border-bottom-color: currentColor; }
 
 .meta { margin: 0.1rem 0 0.6rem; font-size: 0.9375rem; color: var(--muted); }
 
-.entry p { margin: 0 0 0.7rem; }
+.entry p { margin: 0 0 0.5rem; }
 .entry p:last-child { margin-bottom: 0; }
 
 .entry ul { margin: 0; padding-left: 1.15rem; }
-.entry li { margin-bottom: 0.45rem; }
+.entry li { margin-bottom: 0.3rem; }
 .entry li:last-child { margin-bottom: 0; }
 .entry li::marker { color: var(--muted); }
 
 /* The one line that says what was actually difficult. This is the line a
    systems reader stops on, so it gets its own treatment. */
 .hard {
-  margin: 0.7rem 0 0;
+  margin: 0.5rem 0 0;
   padding: 0.55rem 0.85rem;
   background: var(--mark);
   border-left: 2px solid var(--accent);
@@ -206,22 +212,32 @@ footer {
 }
 footer p { margin: 0; }
 
-/* ---- narrow -------------------------------------------------------------- */
+/* ---- tablet --------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  main { padding: 3rem 1.5rem 4rem; }
+  .skills { grid-template-columns: 9.5rem 1fr; gap: 0.6rem 1.1rem; }
+}
+
+/* ---- phone ---------------------------------------------------------------- */
 
 @media (max-width: 620px) {
-  main { padding: 3rem 1.25rem 3.5rem; }
-  h1 { font-size: 1.75rem; }
-  .lede { font-size: 1.03rem; }
+  body { font-size: 15.5px; line-height: 1.5; }
+  main { padding: 2.25rem 1rem 3rem; }
+  h1 { font-size: 1.7rem; }
+  .lede { font-size: 1.02rem; }
+  .intro { font-size: 1rem; }
+  .contact { gap: 0.35rem 0.9rem; font-size: 0.9rem; }
+  section { margin-bottom: 2rem; }
+  h2 { margin-bottom: 1rem; }
+  .entry { margin-bottom: 1.6rem; }
   .entry-head { display: block; }
-  .dates { display: block; margin-top: 0.15rem; }
+  .dates { display: block; margin-top: 0.1rem; white-space: normal; }
+  .stack { font-size: 0.75rem; line-height: 1.5; }
+  .hard { padding: 0.5rem 0.7rem; font-size: 0.9rem; }
   .skills { grid-template-columns: 1fr; gap: 0.1rem; }
-  .skills dd { margin-bottom: 0.75rem; }
-
-  /* At phone measure a justified line is only ~40 characters, which is too few
-     for the spacing to stay even. Ragged right is the better reading. */
-  .intro, .entry > p, .entry li, .skills dd, .writing li, .meta {
-    text-align: left;
-  }
+  .skills dd { margin-bottom: 0.7rem; }
+  footer { margin-top: 2.5rem; }
 }
 
 /* ---- print --------------------------------------------------------------- */

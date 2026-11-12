@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sagore Sarker, Infrastructure Engineer</title>
-<meta name="description" content="Sagore Sarker builds infrastructure software: Firecracker and Cloud Hypervisor microVMs, software-defined networking with Open Virtual Network and Open vSwitch, authoritative DNS with DNSSEC, and PostgreSQL control planes. Mostly Go. Dhaka, Bangladesh.">
+<meta name="description" content="Sagore Sarker is a platform and infrastructure engineer: multi-cloud Kubernetes on AWS, Tencent Cloud and Alibaba Cloud, Firecracker and Cloud Hypervisor microVMs, software-defined networking, authoritative DNS with DNSSEC, and PostgreSQL control planes. Founder of Runfix, the safety net for apps built with AI. Mostly Go. Dhaka, Bangladesh.">
 <meta name="author" content="Sagore Sarker">
 
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Sagore Sarker, Infrastructure Engineer">
-<meta property="og:description" content="I build infrastructure software: microVMs, software-defined networking, database control planes. Mostly Go.">
+<meta property="og:description" content="I build infrastructure software: multi-cloud platforms, microVMs, software-defined networking, database control planes. Mostly Go.">
 <meta property="og:url" content="https://sagoresarker.me/">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://sagoresarker.me/">
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=4">
 
 <script type="application/ld+json">
 {
@@ -27,7 +27,7 @@
   "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" },
   "worksFor": { "@type": "Organization", "name": "Lotus's (CP Axtra)" },
   "alumniOf": { "@type": "CollegeOrUniversity", "name": "Jashore University of Science and Technology" },
-  "knowsAbout": ["Go", "Firecracker", "Cloud Hypervisor", "microVMs", "Kubernetes operators", "Open Virtual Network", "Open vSwitch", "BGP", "DNSSEC", "PostgreSQL", "distributed systems"],
+  "knowsAbout": ["Go", "Kubernetes", "Kubernetes operators", "ArgoCD", "Terraform", "AWS", "Tencent Cloud", "Alibaba Cloud", "Firecracker", "Cloud Hypervisor", "microVMs", "Open Virtual Network", "Open vSwitch", "BGP", "DNSSEC", "PostgreSQL", "Temporal", "distributed systems"],
   "sameAs": ["https://github.com/sagoresarker", "https://www.linkedin.com/in/sagore-sarker/", "https://backendbyte.com"]
 }
 </script>
@@ -39,8 +39,8 @@
   <header class="masthead">
     <h1>Sagore Sarker</h1>
     <p class="lede">
-      I build infrastructure software: microVMs, software-defined networking,
-      database control planes. Mostly Go.
+      I build infrastructure software: multi-cloud platforms, microVMs,
+      software-defined networking, database control planes. Mostly Go.
     </p>
     <p class="contact">
       <span>Dhaka, Bangladesh</span>
@@ -57,8 +57,9 @@
       Currently a DevOps Engineer II at
       <a class="org" href="https://www.lotuss.com" target="_blank" rel="noopener noreferrer">Lotus's (CP Axtra)</a>,
       working remotely from Dhaka, where I write Kubernetes controllers and
-      operators in Go and run production across AWS, Tencent Cloud and Alibaba
-      Cloud. Before that, SRE at
+      operators in Go, run production across AWS, Tencent Cloud and Alibaba
+      Cloud, and am moving our platform stack from AWS to Tencent Cloud.
+      Before that, SRE at
       <a class="org" href="https://pathao.com" target="_blank" rel="noopener noreferrer">Pathao</a>,
       and earlier a backend engineer on a public cloud that serves real
       customers: a Go control plane provisioning hardware-isolated microVMs,
@@ -68,12 +69,66 @@
     <p class="intro">
       Outside work I build the same kind of thing: an authoritative DNS server,
       a PostgreSQL control plane, a sandbox that assumes the code it runs is
-      hostile.
+      hostile. I am also building
+      <a class="org" href="https://runfix.dev" target="_blank" rel="noopener noreferrer">Runfix</a>,
+      my own company: the safety net for apps built with AI.
     </p>
   </section>
 
   <section>
     <h2>Selected work</h2>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3><a href="https://runfix.dev" target="_blank" rel="noopener noreferrer">Runfix</a></h3>
+        <span class="dates">founder, since Oct 2026</span>
+      </div>
+      <p class="stack">Go · Temporal · PostgreSQL · ClickHouse · Cloudflare Workers · eBPF · Next.js</p>
+      <p>
+        The safety net for apps built with AI. Founders who ship with Lovable,
+        Bolt, Cursor or Claude Code cannot always read the code they shipped;
+        Runfix watches their errors and deploys, guards cloud and AI spend, and when
+        production breaks it reproduces the failure in a sandbox, writes a fix,
+        and opens a pull request. It never merges or deploys on its own; every
+        change is a reversible plan a human approves.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> a fix from a model is a guess until something
+        proves it. Every candidate fix must come with a test that fails before
+        the change and passes after, then clear fail-closed gates for
+        regression, security and replay before a pull request exists. The heal
+        loop runs as versioned Temporal workflows that must replay every
+        recorded history, tenants are separated by forced row-level security in
+        Postgres, and sandboxes get either no network or a proxy that installs
+        exactly what the lockfile says.
+      </p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <!-- Private repo. Link once public:
+             <a href="https://github.com/sagoresarker/incident-mind" target="_blank" rel="noopener noreferrer">incident-mind</a> -->
+        <h3>incident-mind</h3>
+        <span class="dates">since Aug 2026</span>
+      </div>
+      <p class="stack">Go · Kubernetes · Prometheus · Loki · Datadog · ArgoCD · Helm</p>
+      <p>
+        A root-cause analysis engine for SRE and platform teams that runs
+        inside your own cloud and only ever reads your telemetry. It takes an
+        alert from Alertmanager or PagerDuty, gathers evidence from Prometheus,
+        Loki, Datadog, ArgoCD and the Kubernetes API, and reports a cause with
+        every claim tied to the evidence behind it. Ships as a Helm chart with
+        read-only RBAC and a single-egress network policy.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> keeping the model honest. A deterministic state
+        machine in Go owns the investigation and the evidence graph; the
+        language model only proposes, and every hypothesis has to say what
+        result would disprove it. Recent changes are ranked by timing and
+        dependency distance before any model call, raw telemetry never enters
+        a prompt, and an investigation replays byte for byte.
+      </p>
+    </article>
 
     <article class="entry">
       <div class="entry-head">
@@ -206,10 +261,25 @@
           reconciliation and platform-level access management. Extended ArgoCD
           with GitOps application lifecycle features and ran multi-environment
           deployments through ArgoCD and Helm.</li>
-        <li>Ran production infrastructure across AWS, Tencent Cloud and Alibaba
-          Cloud. Designed cross-cloud site-to-site VPN connectivity and executed
-          production RDS migrations with validated backup chains.</li>
-        <li>Designed an internal logging platform handling petabyte-scale logs.</li>
+        <li>Leading the move of our platform stack from AWS to Tencent Cloud:
+          the developer platform, Authentik, NetBird, Temporal, ArgoCD and
+          GitLab runners from EKS to TKE, and RDS to TencentDB for PostgreSQL
+          with cross-zone HA, on a CCN hub-and-spoke network across three VPCs,
+          all written in Terraspace.</li>
+        <li>Cut DNS over without renaming anything: external-dns on TKE writes
+          to the shared Route 53 zone with per-cluster ownership records,
+          rolled out upsert-only before sync, so a service keeps its hostname
+          when it moves from EKS to TKE.</li>
+        <li>Built the AWS to Alibaba Cloud site-to-site VPN and the Terraspace
+          stacks for ACK, ALB, CEN, RDS, Redis and RocketMQ, and designed
+          private routing from Alibaba Cloud in Bangkok to on-prem services
+          through AWS Transit Gateway.</li>
+        <li>Traced Oracle queries that stalled on a third of batch runs to an
+          MTU black hole between EKS pods and on-prem (8500 assumed, 1500 real,
+          ICMP filtered) and fixed it with TCP MSS clamping, without downtime.</li>
+        <li>Designed an internal logging platform handling petabyte-scale logs,
+          and scaled its OpenSearch warm tier from 3 to 8 UltraWarm nodes after
+          it had sat full for two weeks, without downtime.</li>
         <li>Owned the SSL/TLS certificate lifecycle across enterprise platforms
           on AWS Certificate Manager.</li>
         <li>Integrated Authentik for centralized IAM, deployed NetBird zero-trust
@@ -267,29 +337,34 @@
     <h2>Tools</h2>
     <dl class="skills">
       <dt>Languages</dt>
-      <dd>Go, Python, Bash, C++</dd>
+      <dd>Go, Rust, Python, TypeScript, Bash, SQL, C++</dd>
 
       <dt>Systems</dt>
       <dd>Firecracker, Cloud Hypervisor, KVM, microVMs, Docker and the Docker
-        Engine API, Linux, cgroups and namespaces, containers and sandboxing</dd>
+        Engine API, Linux, cgroups and namespaces, gVisor, eBPF, containers and
+        sandboxing</dd>
 
       <dt>Networking</dt>
       <dd>Open Virtual Network, Open vSwitch, Geneve, BGP and ECMP with GoBGP,
-        Envoy and xDS, WireGuard, gRPC, DNS and DNSSEC</dd>
+        Envoy and xDS, WireGuard, NetBird, site-to-site VPN, Transit Gateway,
+        CCN and CEN, gRPC, DNS and DNSSEC</dd>
 
       <dt>Orchestration</dt>
       <dd>Kubernetes, controller-runtime and Kubebuilder, Temporal, Helm, ArgoCD,
-        Terraform, Ansible, NGINX, Kong</dd>
+        Terraform, Terraspace, Ansible, external-dns, cert-manager, Vault, NGINX,
+        Kong</dd>
 
       <dt>Data</dt>
-      <dd>PostgreSQL, pgBackRest, PgCat, MySQL, MongoDB, Redis, etcd, AWS SQS,
-        Google Pub/Sub</dd>
+      <dd>PostgreSQL, pgBackRest, PgCat, PgBouncer, MySQL, MongoDB, Redis,
+        ClickHouse, etcd, Kafka, AWS SQS, Google Pub/Sub, RocketMQ</dd>
 
       <dt>Clouds</dt>
-      <dd>AWS, Google Cloud Platform, Alibaba Cloud, Tencent Cloud, bare metal</dd>
+      <dd>AWS, Tencent Cloud, Alibaba Cloud, Google Cloud Platform, Cloudflare,
+        bare metal</dd>
 
       <dt>Observability</dt>
-      <dd>Prometheus, Grafana, OpenTelemetry, GitLab CI, Jenkins</dd>
+      <dd>Prometheus, Grafana, OpenTelemetry, OpenSearch, Datadog, Loki, GitLab
+        CI, Jenkins</dd>
     </dl>
   </section>
 
