@@ -1,27 +1,29 @@
 /* sagoresarker.me */
 
 :root {
-  /* The page is light for everyone. Without this a browser in dark mode still
-     paints its own scrollbars and form controls dark against it. */
   color-scheme: light;
 
-  --ink:    #17191c;
-  --body:   #3a3f46;
-  --muted:  #6d747d;
-  --rule:   #e6e3dd;
+  --ink:    #14171c;
+  --body:   #3a3f47;
+  --muted:  #6b727c;
+  --rule:   #e5e2dc;
+  --line:   #ece9e4;
   --accent: #1a3c6e;
-  --mark:   #f2efe9;   /* a tint of the page, not a grey box laid on top of it */
-  --bg:     #fbfaf8;   /* off-white: less glare than #fff, still reads as white */
+  --accent-soft: #e9eef6;
+  --surface: #ffffff;
+  --bg:     #fbfaf8;
 
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
-          "Helvetica Neue", Arial, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
-          "Liberation Mono", monospace;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --wrap: 1080px;
+  --label: 180px;
+  --gap: 56px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
   margin: 0;
@@ -29,254 +31,321 @@ body {
   color: var(--body);
   font-family: var(--sans);
   font-size: 16px;
-  line-height: 1.55;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Wide enough on a laptop that entries don't turn into long narrow columns,
-   still short enough that a line of prose stays readable. */
-main {
-  width: 100%;
-  max-width: 58rem;
-  margin: 0 auto;
-  padding: 4rem 2rem 5rem;
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.skip {
+  position: absolute; left: -999px; top: 8px;
+  background: var(--ink); color: #fff; padding: 8px 12px; border-radius: 6px; z-index: 10;
 }
-@media (min-width: 1440px) {
-  main { max-width: 64rem; }
+.skip:focus { left: 16px; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 32px; }
+
+/* ---- header ---------------------------------------------------------------- */
+
+.top {
+  padding: 72px 0 56px;
+  border-bottom: 1px solid var(--rule);
 }
 
-/* Long emails and URLs must wrap rather than push the page sideways on phones. */
-a, .stack { overflow-wrap: anywhere; }
-
-a {
-  color: var(--accent);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(26, 60, 110, 0.3);
-}
-a:hover { border-bottom-color: currentColor; }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
-
-/* ---- masthead ------------------------------------------------------------ */
-
-.masthead { margin-bottom: 2rem; }
-
-h1 {
+.top h1 {
   margin: 0;
-  font-size: 2.1rem;
-  line-height: 1.15;
-  letter-spacing: -0.021em;
-  font-weight: 600;
+  font-size: 2.75rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 700;
   color: var(--ink);
 }
 
-/* The first line is about the work, not the job title. */
-.lede {
-  margin: 0.55rem 0 0;
-  font-size: 1.1rem;
-  line-height: 1.5;
+.role {
+  margin: 10px 0 0;
+  font-size: 1.125rem;
+  font-weight: 500;
   color: var(--ink);
 }
 
-/* Availability: the one line a recruiter skims for. */
+.summary {
+  max-width: 640px;
+  margin: 20px 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
 .status {
-  margin: 0.6rem 0 0;
-  font-size: 0.9375rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 6px 12px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+}
+.status::before {
+  content: "";
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #2f8a57;
+  box-shadow: 0 0 0 3px rgba(47, 138, 87, 0.18);
 }
 
-.contact {
+.actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3rem 1.15rem;
-  margin: 1.15rem 0 0;
+  gap: 10px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
   font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.btn:hover { text-decoration: none; border-color: var(--accent); }
+.btn--primary { color: #fff; background: var(--accent); border-color: var(--accent); }
+.btn--primary:hover { background: #142f57; }
+
+.where {
+  margin: 18px 0 0;
+  font-size: 0.875rem;
   color: var(--muted);
 }
 
-/* ---- sections ------------------------------------------------------------ */
+/* ---- sections: label column + content -------------------------------------- */
 
-section { margin-bottom: 2.5rem; }
-section:last-of-type { margin-bottom: 0; }
-
-h2 {
-  margin: 0 0 1.4rem;
-  padding-bottom: 0.5rem;
+.section {
+  display: grid;
+  grid-template-columns: var(--label) minmax(0, 1fr);
+  gap: var(--gap);
+  padding: 56px 0;
   border-bottom: 1px solid var(--rule);
-  font-size: 0.775rem;
+}
+.section:last-of-type { border-bottom: 0; }
+
+.section > h2 {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  margin: 2px 0 0;
+  font-size: 0.9375rem;
   font-weight: 600;
-  letter-spacing: 0.115em;
-  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.content { min-width: 0; max-width: 760px; }
+
+/* ---- experience ------------------------------------------------------------ */
+
+.job + .job { margin-top: 44px; }
+
+.job__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px 16px;
+}
+.job h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.job__org { font-weight: 500; color: var(--ink); }
+.job__when {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.job__where { margin: 2px 0 0; font-size: 0.9375rem; color: var(--muted); }
+
+.job ul {
+  margin: 14px 0 0;
+  padding-left: 1.1rem;
+}
+.job li { margin-bottom: 8px; }
+.job li::marker { color: #b3b0aa; }
+
+.stack {
+  margin: 14px 0 0;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
   color: var(--muted);
 }
 
-/* Body copy is ragged right. Justified text opened wide gaps between words
-   around the long technical terms this page is full of. */
-.intro,
-.entry > p,
-.entry li,
-.skills dd,
-.writing li,
-.meta {
-  text-align: left;
+.reads {
+  margin: 14px 0 0;
+  font-size: 0.9375rem;
+}
+.reads span { color: var(--muted); }
+
+/* ---- projects -------------------------------------------------------------- */
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 
-/* Never break these across a line: a hyphenated Open vSwitch or pgBackRest reads
-   as a typo rather than a line break. */
-.stack, code, tt, a[href^="http"] { hyphens: none; -webkit-hyphens: none; }
+.project {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.project--featured {
+  grid-column: 1 / -1;
+  border-color: #cfd8e6;
+  background: linear-gradient(180deg, #f7f9fc 0%, var(--surface) 70%);
+}
 
-.intro { margin: 0; font-size: 1.0625rem; }
-.intro + .intro { margin-top: 0.6rem; }
-
-/* Employers carry weight in a paragraph that is otherwise a wall of prose, so
-   they are the one thing a skimming reader should catch. */
-.org { font-weight: 600; color: var(--ink); border-bottom-color: var(--rule); }
-.org:hover { color: var(--accent); border-bottom-color: currentColor; }
-
-/* ---- entries ------------------------------------------------------------- */
-
-.entry { margin-bottom: 2rem; }
-.entry:last-child { margin-bottom: 0; }
-
-.entry-head {
+.project__head {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 1rem;
+  gap: 12px;
 }
-
-h3 {
+.project h3 {
   margin: 0;
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--ink);
 }
-h3 a { color: inherit; border-bottom-color: var(--rule); }
-h3 a:hover { color: var(--accent); border-bottom-color: currentColor; }
-
-.dates {
+.project h3 a { color: inherit; }
+.project__tag {
   flex: none;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--muted);
   white-space: nowrap;
 }
-
-.stack {
-  margin: 0.2rem 0 0.55rem;
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  color: var(--muted);
-}
-
-.meta { margin: 0.1rem 0 0.6rem; font-size: 0.9375rem; color: var(--muted); }
-
-.entry p { margin: 0 0 0.5rem; }
-.entry p:last-child { margin-bottom: 0; }
-
-.entry ul { margin: 0; padding-left: 1.15rem; }
-.entry li { margin-bottom: 0.3rem; }
-.entry li:last-child { margin-bottom: 0; }
-.entry li::marker { color: var(--muted); }
-
-/* The one line that says what was actually difficult. This is the line a
-   systems reader stops on, so it gets its own treatment. */
-.hard {
-  margin: 0.5rem 0 0;
-  padding: 0.55rem 0.85rem;
-  background: var(--mark);
+.project p { margin: 10px 0 0; font-size: 0.9375rem; line-height: 1.6; }
+.project__hard {
+  padding-left: 12px;
   border-left: 2px solid var(--accent);
-  font-size: 0.9375rem;
-  border-radius: 0 2px 2px 0;
+  color: var(--body);
 }
-.hard b { color: var(--ink); font-weight: 600; }
+.project__hard b { color: var(--ink); font-weight: 600; }
+.project .stack { margin-top: auto; padding-top: 14px; }
+.project .reads { margin-top: 10px; font-size: 0.875rem; }
 
-/* Links from an entry to the posts that explain it in depth. */
-.writing-links {
-  margin: 0.75rem 0 0;
+.more {
+  margin: 20px 0 0;
   font-size: 0.9375rem;
-}
-.writing-links__label {
-  margin: 0 0 0.2rem;
-  font-size: 0.8125rem;
   color: var(--muted);
 }
-.writing-links ul { margin: 0; padding-left: 1.15rem; }
-.writing-links li { margin-bottom: 0.15rem; }
-.writing-links li::marker { color: var(--muted); }
 
-/* ---- writing ------------------------------------------------------------- */
+/* ---- writing --------------------------------------------------------------- */
 
-.writing { list-style: none; margin: 0; padding: 0; }
-.writing li { margin-bottom: 0.9rem; }
-.writing li:last-child { margin-bottom: 0; }
-.writing .when { display: block; font-size: 0.8125rem; color: var(--muted); }
+.posts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.posts li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.posts a { color: var(--ink); font-weight: 500; }
+.posts a:hover { color: var(--accent); }
+.posts time {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
 
-/* ---- skills -------------------------------------------------------------- */
+/* ---- skills ---------------------------------------------------------------- */
 
 .skills {
   display: grid;
-  grid-template-columns: 12rem 1fr;
-  gap: 0.65rem 1.5rem;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 12px 24px;
   margin: 0;
 }
-.skills dt { font-size: 0.9375rem; font-weight: 600; color: var(--ink); }
-.skills dd { margin: 0; }
+.skills dt { font-weight: 600; color: var(--ink); font-size: 0.9375rem; }
+.skills dd { margin: 0; font-size: 0.9375rem; }
 
-/* ---- footer -------------------------------------------------------------- */
+/* ---- education ------------------------------------------------------------- */
 
-footer {
-  margin-top: 3.5rem;
-  padding-top: 1.4rem;
+.edu h3 { margin: 0; font-size: 1.0625rem; font-weight: 600; color: var(--ink); }
+.edu p { margin: 2px 0 0; color: var(--muted); font-size: 0.9375rem; }
+
+/* ---- footer ---------------------------------------------------------------- */
+
+.foot {
+  padding: 32px 0 48px;
   border-top: 1px solid var(--rule);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   color: var(--muted);
 }
-footer p { margin: 0; }
+.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 18px; }
 
-/* ---- tablet --------------------------------------------------------------- */
+/* ---- responsive ------------------------------------------------------------ */
 
-@media (max-width: 860px) {
-  main { padding: 3rem 1.5rem 4rem; }
-  .skills { grid-template-columns: 9.5rem 1fr; gap: 0.6rem 1.1rem; }
+@media (max-width: 900px) {
+  :root { --gap: 12px; }
+  .section { grid-template-columns: minmax(0, 1fr); padding: 44px 0; }
+  .section > h2 { position: static; font-size: 1rem; }
+  .content { max-width: none; }
 }
 
-/* ---- phone ---------------------------------------------------------------- */
-
-@media (max-width: 620px) {
-  body { font-size: 15.5px; line-height: 1.5; }
-  main { padding: 2.25rem 1rem 3rem; }
-  h1 { font-size: 1.7rem; }
-  .lede { font-size: 1.02rem; }
-  .intro { font-size: 1rem; }
-  .contact { gap: 0.35rem 0.9rem; font-size: 0.9rem; }
-  section { margin-bottom: 2rem; }
-  h2 { margin-bottom: 1rem; }
-  .entry { margin-bottom: 1.6rem; }
-  .entry-head { display: block; }
-  .dates { display: block; margin-top: 0.1rem; white-space: normal; }
-  .stack { font-size: 0.75rem; line-height: 1.5; }
-  .hard { padding: 0.5rem 0.7rem; font-size: 0.9rem; }
-  .skills { grid-template-columns: 1fr; gap: 0.1rem; }
-  .skills dd { margin-bottom: 0.7rem; }
-  footer { margin-top: 2.5rem; }
+@media (max-width: 640px) {
+  .wrap { padding: 0 20px; }
+  .top { padding: 48px 0 40px; }
+  .top h1 { font-size: 2.125rem; }
+  .role { font-size: 1.0625rem; }
+  .summary { font-size: 1rem; }
+  .projects { grid-template-columns: minmax(0, 1fr); }
+  .project { padding: 20px; }
+  .project__head { flex-direction: column; gap: 2px; }
+  .skills { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .skills dd { margin-bottom: 12px; }
+  .posts li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .btn { flex: 1 1 auto; justify-content: center; }
 }
 
-/* ---- print --------------------------------------------------------------- */
+/* ---- print ----------------------------------------------------------------- */
 
-@page { margin: 16mm; }
-
+@page { margin: 14mm; }
 @media print {
-  :root {
-    --ink: #000; --body: #1a1a1a; --muted: #444; --rule: #bbb;
-    --accent: #000; --mark: #f4f4f4; --bg: #fff;
-  }
-  body { font-size: 10pt; line-height: 1.45; }
-  main { max-width: none; padding: 0; }
-  a { border: 0; }
-  section { margin-bottom: 1.4rem; }
-  .entry { margin-bottom: 1rem; break-inside: avoid; }
-  h2, h3 { break-after: avoid; }
-  .hard { border-left-width: 1px; }
-  footer { display: none; }
+  :root { --bg: #fff; --accent: #000; }
+  body { font-size: 10pt; }
+  .actions, .skip, .status::before { display: none; }
+  .section { grid-template-columns: 120px 1fr; gap: 20px; padding: 16px 0; break-inside: avoid-page; }
+  .section > h2 { position: static; }
+  .project { border: 1px solid #ccc; break-inside: avoid; }
+  .job { break-inside: avoid; }
+  a { color: #000; }
+}
+
+/* An odd card at the end of the two-column grid spans the full row. */
+@media (min-width: 641px) {
+  .projects > .project:last-child:nth-child(even) { grid-column: 1 / -1; }
 }
