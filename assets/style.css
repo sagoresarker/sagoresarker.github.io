@@ -78,6 +78,14 @@ h1 {
   color: var(--ink);
 }
 
+/* Availability: the one line a recruiter skims for. */
+.status {
+  margin: 0.6rem 0 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
 .contact {
   display: flex;
   flex-wrap: wrap;
@@ -182,6 +190,20 @@ h3 a:hover { color: var(--accent); border-bottom-color: currentColor; }
   border-radius: 0 2px 2px 0;
 }
 .hard b { color: var(--ink); font-weight: 600; }
+
+/* Links from an entry to the posts that explain it in depth. */
+.writing-links {
+  margin: 0.75rem 0 0;
+  font-size: 0.9375rem;
+}
+.writing-links__label {
+  margin: 0 0 0.2rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.writing-links ul { margin: 0; padding-left: 1.15rem; }
+.writing-links li { margin-bottom: 0.15rem; }
+.writing-links li::marker { color: var(--muted); }
 
 /* ---- writing ------------------------------------------------------------- */
 

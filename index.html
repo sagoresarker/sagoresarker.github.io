@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://sagoresarker.me/">
-<link rel="stylesheet" href="assets/style.css?v=4">
+<link rel="stylesheet" href="assets/style.css?v=6">
 
 <script type="application/ld+json">
 {
@@ -42,6 +42,7 @@
       I build infrastructure software: multi-cloud platforms, microVMs,
       software-defined networking, database control planes. Mostly Go.
     </p>
+    <p class="status">Open to platform, infrastructure and DevOps engineering roles (remote).</p>
     <p class="contact">
       <span>Dhaka, Bangladesh</span>
       <a href="mailto:sagoresarker.cse@gmail.com">sagoresarker.cse@gmail.com</a>
@@ -54,196 +55,18 @@
 
   <section>
     <p class="intro">
-      Currently a DevOps Engineer II at
+      DevOps Engineer II at
       <a class="org" href="https://www.lotuss.com" target="_blank" rel="noopener noreferrer">Lotus's (CP Axtra)</a>,
-      working remotely from Dhaka, where I write Kubernetes controllers and
-      operators in Go, run production across AWS, Tencent Cloud and Alibaba
-      Cloud, and am moving our platform stack from AWS to Tencent Cloud.
-      Before that, SRE at
-      <a class="org" href="https://pathao.com" target="_blank" rel="noopener noreferrer">Pathao</a>,
-      and earlier a backend engineer on a public cloud that serves real
-      customers: a Go control plane provisioning hardware-isolated microVMs,
-      multi-tenant software-defined networking, and the routing layer that
-      keeps customer traffic reaching it.
+      moving a production platform from AWS to Tencent Cloud. Before that, SRE at
+      <a class="org" href="https://pathao.com" target="_blank" rel="noopener noreferrer">Pathao</a>
+      and a backend engineer on a public cloud built on microVMs.
     </p>
     <p class="intro">
-      Outside work I build the same kind of thing: an authoritative DNS server,
-      a PostgreSQL control plane, a sandbox that assumes the code it runs is
-      hostile. I am also building
+      Outside work I build
       <a class="org" href="https://runfix.dev" target="_blank" rel="noopener noreferrer">Runfix</a>,
-      my own company: the safety net for apps built with AI.
+      the safety net for apps built with AI, and infrastructure projects
+      that assume the worst: hostile code, paused workers, broken backups.
     </p>
-  </section>
-
-  <section>
-    <h2>Selected work</h2>
-
-    <article class="entry">
-      <div class="entry-head">
-        <h3><a href="https://runfix.dev" target="_blank" rel="noopener noreferrer">Runfix</a></h3>
-        <span class="dates">founder, since Oct 2026</span>
-      </div>
-      <p class="stack">Go · Temporal · PostgreSQL · ClickHouse · Cloudflare Workers · eBPF · Next.js</p>
-      <p>
-        The safety net for apps built with AI. Founders who ship with Lovable,
-        Bolt, Cursor or Claude Code cannot always read the code they shipped;
-        Runfix watches their errors and deploys, guards cloud and AI spend, and when
-        production breaks it reproduces the failure in a sandbox, writes a fix,
-        and opens a pull request. It never merges or deploys on its own; every
-        change is a reversible plan a human approves.
-      </p>
-      <p class="hard">
-        <b>The hard part:</b> a fix from a model is a guess until something
-        proves it. Every candidate fix must come with a test that fails before
-        the change and passes after, then clear fail-closed gates for
-        regression, security and replay before a pull request exists. The heal
-        loop runs as versioned Temporal workflows that must replay every
-        recorded history, tenants are separated by forced row-level security in
-        Postgres, and sandboxes get either no network or a proxy that installs
-        exactly what the lockfile says.
-      </p>
-    </article>
-
-    <article class="entry">
-      <div class="entry-head">
-        <!-- Private repo. Link once public:
-             <a href="https://github.com/sagoresarker/incident-mind" target="_blank" rel="noopener noreferrer">incident-mind</a> -->
-        <h3>incident-mind</h3>
-        <span class="dates">since Aug 2026</span>
-      </div>
-      <p class="stack">Go · Kubernetes · Prometheus · Loki · Datadog · ArgoCD · Helm</p>
-      <p>
-        A root-cause analysis engine for SRE and platform teams that runs
-        inside your own cloud and only ever reads your telemetry. It takes an
-        alert from Alertmanager or PagerDuty, gathers evidence from Prometheus,
-        Loki, Datadog, ArgoCD and the Kubernetes API, and reports a cause with
-        every claim tied to the evidence behind it. Ships as a Helm chart with
-        read-only RBAC and a single-egress network policy.
-      </p>
-      <p class="hard">
-        <b>The hard part:</b> keeping the model honest. A deterministic state
-        machine in Go owns the investigation and the evidence graph; the
-        language model only proposes, and every hypothesis has to say what
-        result would disprove it. Recent changes are ranked by timing and
-        dependency distance before any model call, raw telemetry never enters
-        a prompt, and an investigation replays byte for byte.
-      </p>
-    </article>
-
-    <article class="entry">
-      <div class="entry-head">
-        <!-- The repo is private, so a link here 404s for everyone but you.
-             Re-enable once it is public:
-             <a href="https://github.com/sagoresarker/runbox" target="_blank" rel="noopener noreferrer">runbox</a> -->
-        <h3>runbox</h3>
-        <span class="dates">since Aug 2026</span>
-      </div>
-      <p class="stack">Go · Docker · PostgreSQL</p>
-      <p>
-        The hosted sandbox worker behind
-        <a href="https://runtimelab.io" target="_blank" rel="noopener noreferrer">runtimelab</a>.
-        It executes submitted code
-        on my own hardware on the assumption that the code is hostile: no
-        database credentials, no repository access, no user secrets anywhere in
-        the blast radius. Every job runs in a container with no network and hard
-        limits on CPU, memory, process count and wall-clock time.
-      </p>
-      <p class="hard">
-        <b>The hard part:</b> a lease with a timeout is not a lock. A worker that
-        is paused by GC, by CPU starvation, by a partition, is not dead, and will
-        happily finish a job another worker has already taken. Jobs are claimed
-        under a monotonic fencing epoch that Postgres enforces on every write, so
-        a stale worker's writes affect zero rows instead of corrupting the run.
-      </p>
-    </article>
-
-    <article class="entry">
-      <div class="entry-head">
-        <h3><a href="https://gatecraft.net" target="_blank" rel="noopener noreferrer">gatecraft</a></h3>
-        <span class="dates">since Mar 2026</span>
-      </div>
-      <p class="stack">Go · PostgreSQL · Redis · TimescaleDB · Temporal</p>
-      <p>
-        Five cooperating Go services (API, reverse proxy, authoritative DNS,
-        uptime monitor, worker) covering what a small site actually needs from a
-        web infrastructure provider. The proxy runs a full WAF (Coraza with the
-        OWASP core rules), GeoIP blocking, Redis Lua sliding-window rate limiting
-        and automatic Let's Encrypt certificates through CertMagic. The
-        long-running work behind all of it — scheduled checks, certificate
-        renewal — runs as Temporal workflows, so a restart resumes where it left
-        off instead of starting the job over.
-      </p>
-      <p class="hard">
-        <b>The hard part:</b> the DNS server is written from the wire format up,
-        in pure Go, with DNSSEC signing on ECDSA P-256, chosen over RSA because
-        the signatures still fit a UDP response. Three-tier caching and response
-        rate limiting to blunt amplification.
-      </p>
-    </article>
-
-    <article class="entry">
-      <div class="entry-head">
-        <h3><a href="https://sagoresarker.github.io/pgfleet/" target="_blank" rel="noopener noreferrer">pgfleet</a></h3>
-        <span class="dates">since Jun 2026</span>
-      </div>
-      <p class="stack">Go · Next.js · pgBackRest · PgCat</p>
-      <p>
-        A self-hosted PostgreSQL control plane, roughly an open-source RDS. It
-        provisions isolated container-based Postgres instances through the Docker
-        Engine API, with a Go backend on chi and pgx and a management console.
-        High availability through streaming replicas with read/write routing via
-        PgCat. Written test-first, 78% coverage.
-      </p>
-      <p class="hard">
-        <b>The hard part:</b> point-in-time recovery is only real if the WAL chain
-        is unbroken, so backups are scheduled to S3 or MinIO through pgBackRest
-        <em>and verified</em>. A restore you have never tested is not a backup.
-      </p>
-    </article>
-
-    <article class="entry">
-      <div class="entry-head">
-        <h3><a href="https://runtimelab.io" target="_blank" rel="noopener noreferrer">runtimelab</a></h3>
-        <span class="dates">since Feb 2026</span>
-      </div>
-      <p class="stack">Go · Next.js · PostgreSQL · Docker</p>
-      <p>
-        A self-hostable "build your own X" platform: 464 staged challenges across
-        5 languages. The Go backend does GitHub OAuth, hashed sessions, per-user
-        runner tokens, long-poll job dispatch, SSE log streaming and git
-        smart-HTTP hosting with push-to-test.
-      </p>
-      <p class="hard">
-        <b>The hard part:</b> execution works like a GitLab runner: an agent on
-        the learner's own machine polls for jobs and runs them in Docker against
-        checksum-pinned test suites. The server never executes untrusted code,
-        and hosting cost stays flat as usage grows.
-      </p>
-    </article>
-
-    <p class="meta">
-      Earlier work on <a href="https://github.com/sagoresarker" target="_blank" rel="noopener noreferrer">GitHub</a>: a
-      Memcached operator built with Kubebuilder, a finite-state-machine task
-      queue, a sliding-window rate limiter in Redis.
-    </p>
-  </section>
-
-  <section>
-    <h2>Writing</h2>
-    <ul class="writing">
-      <!-- Add each post here as it lands. Phrase the line as the claim, not the
-           topic. "a lease with a timeout is not a lock" beats "on locking".
-      <li>
-        <a href="https://backendbyte.com/..." target="_blank" rel="noopener noreferrer">Fencing epochs: why my sandbox worker can't double-run a job</a>
-        <span class="when">September 2026</span>
-      </li>
-      -->
-      <li>
-        I write about infrastructure and systems work at
-        <a href="https://backendbyte.com" target="_blank" rel="noopener noreferrer">backendbyte.com</a>: DNS and DNSSEC,
-        overlay networking, microVMs, and Postgres internals.
-      </li>
-    </ul>
   </section>
 
   <section>
@@ -286,6 +109,13 @@
           VPN for the engineering teams, and maintained Jenkins pipelines for
           multi-environment releases.</li>
       </ul>
+      <div class="writing-links">
+        <p class="writing-links__label">Read more on the blog</p>
+        <ul>
+          <li><a href="https://backendbyte.com/posts/networking/eks-to-tke-without-renaming-hostnames/" target="_blank" rel="noopener">Moving from EKS to TKE without renaming a hostname</a></li>
+          <li><a href="https://backendbyte.com/posts/networking/mtu-black-hole-oracle-mss-clamp/" target="_blank" rel="noopener">The MTU black hole that looked like a slow database</a></li>
+        </ul>
+      </div>
     </article>
 
     <article class="entry">
@@ -330,41 +160,270 @@
         <li>Designed highly available backends with gRPC, Redis-backed Pub/Sub
           queues and state machines at both the application and database level.</li>
       </ul>
+      <div class="writing-links">
+        <p class="writing-links__label">Read more on the blog</p>
+        <ul>
+          <li><a href="https://backendbyte.com/series/building-a-microvm-cloud/" target="_blank" rel="noopener">Building a microVM cloud (3-part series)</a></li>
+          <li><a href="https://backendbyte.com/posts/systems/firecracker-vs-cloud-hypervisor/" target="_blank" rel="noopener">Firecracker vs Cloud Hypervisor</a></li>
+        </ul>
+      </div>
     </article>
   </section>
+
+  <section>
+    <h2>Selected work</h2>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3><a href="https://runfix.dev" target="_blank" rel="noopener noreferrer">Runfix</a></h3>
+        <span class="dates">founder, since Oct 2026</span>
+      </div>
+      <p>
+        The safety net for apps built with AI. Founders who ship with Lovable,
+        Bolt, Cursor or Claude Code cannot always read the code they shipped;
+        Runfix watches their errors and deploys, guards cloud and AI spend, and when
+        production breaks it reproduces the failure in a sandbox, writes a fix,
+        and opens a pull request. It never merges or deploys on its own; every
+        change is a reversible plan a human approves.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> a fix from a model is a guess until something
+        proves it. Runfix only opens a pull request when the fix comes with a
+        test that fails before the change and passes after, and it never merges
+        or deploys anything by itself.
+      </p>
+      <div class="writing-links">
+        <p class="writing-links__label">Read more on the blog</p>
+        <ul>
+          <li><a href="https://backendbyte.com/posts/devtools/runfix-safety-net-for-ai-built-apps/" target="_blank" rel="noopener">Runfix: a safety net for apps built with AI</a></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <!-- Private repo. Link once public:
+             <a href="https://github.com/sagoresarker/incident-mind" target="_blank" rel="noopener noreferrer">incident-mind</a> -->
+        <h3>incident-mind</h3>
+        <span class="dates">in development, since Aug 2026</span>
+      </div>
+      <p class="stack">Go · Kubernetes · Prometheus · Loki · Datadog · ArgoCD · Helm</p>
+      <p>
+        A root-cause analysis engine I'm building for SRE and platform teams.
+        It runs inside your own cloud and only reads telemetry: given an alert
+        from Alertmanager or PagerDuty, it gathers evidence from Prometheus,
+        Loki, Datadog, ArgoCD and the Kubernetes API and reports a cause with
+        every claim tied to evidence. Packaged as a Helm chart with read-only
+        RBAC and a single-egress network policy; so far evaluated on scripted
+        incidents, not yet on a live cluster.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> keeping the model honest. A deterministic state
+        machine in Go owns the investigation and the evidence graph; the
+        language model only proposes, and every hypothesis has to say what
+        result would disprove it. Recent changes are ranked by timing and
+        dependency distance before any model call, raw telemetry never enters
+        a prompt, and an investigation replays byte for byte.
+      </p>
+      <div class="writing-links">
+        <p class="writing-links__label">Read more on the blog</p>
+        <ul>
+          <li><a href="https://backendbyte.com/series/incident-mind/" target="_blank" rel="noopener">The incident-mind series (3 parts)</a></li>
+          <li><a href="https://backendbyte.com/posts/backend/let-the-model-propose-not-decide/" target="_blank" rel="noopener">Let the model propose, not decide</a></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <!-- The repo is private, so a link here 404s for everyone but you.
+             Re-enable once it is public:
+             <a href="https://github.com/sagoresarker/runbox" target="_blank" rel="noopener noreferrer">runbox</a> -->
+        <h3>runbox</h3>
+        <span class="dates">since Aug 2026</span>
+      </div>
+      <p class="stack">Go · Docker · PostgreSQL</p>
+      <p>
+        The hosted sandbox worker behind
+        <a href="https://runtimelab.io" target="_blank" rel="noopener noreferrer">runtimelab</a>.
+        It executes submitted code
+        on my own hardware on the assumption that the code is hostile: no
+        database credentials, no repository access, no user secrets anywhere in
+        the blast radius. Every job runs in a container with no network and hard
+        limits on CPU, memory, process count and wall-clock time.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> a lease with a timeout is not a lock. A worker that
+        is paused by GC, by CPU starvation, by a partition, is not dead, and will
+        happily finish a job another worker has already taken. Jobs are claimed
+        under a monotonic fencing epoch that Postgres enforces on every write, so
+        a stale worker's writes affect zero rows instead of corrupting the run.
+      </p>
+      <div class="writing-links">
+        <p class="writing-links__label">Read more on the blog</p>
+        <ul>
+          <li><a href="https://backendbyte.com/series/runbox/" target="_blank" rel="noopener">The runbox series (3 parts)</a></li>
+          <li><a href="https://backendbyte.com/posts/systems/lease-with-a-timeout-is-not-a-lock/" target="_blank" rel="noopener">A lease with a timeout is not a lock</a></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3><a href="https://gatecraft.net" target="_blank" rel="noopener noreferrer">gatecraft</a></h3>
+        <span class="dates">since Mar 2026</span>
+      </div>
+      <p class="stack">Go · PostgreSQL · Redis · TimescaleDB · Temporal</p>
+      <p>
+        Five cooperating Go services (API, reverse proxy, authoritative DNS,
+        uptime monitor, worker) covering what a small site actually needs from a
+        web infrastructure provider. The proxy runs a full WAF (Coraza with the
+        OWASP core rules), GeoIP blocking, Redis Lua sliding-window rate limiting
+        and automatic Let's Encrypt certificates through CertMagic. Domain
+        verification, activation, alerting and retention run as Temporal
+        workflows, so a restart resumes where it left off instead of starting
+        the job over.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> the authoritative DNS server signs answers per query
+        with DNSSEC on ECDSA P-256 instead of RSA, which keeps signed responses
+        small enough to fit in UDP. It sits on miekg/dns for the wire codec,
+        with three-tier caching and response rate limiting to blunt
+        amplification.
+      </p>
+      <div class="writing-links">
+        <p class="writing-links__label">Read more on the blog</p>
+        <ul>
+          <li><a href="https://backendbyte.com/series/gatecraft/" target="_blank" rel="noopener">The gatecraft series (4 parts)</a></li>
+          <li><a href="https://backendbyte.com/posts/networking/online-dnssec-signing-ecdsa-p256/" target="_blank" rel="noopener">Online DNSSEC with ECDSA P-256</a></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3><a href="https://sagoresarker.github.io/pgfleet/" target="_blank" rel="noopener noreferrer">pgfleet</a></h3>
+        <span class="dates">since Jun 2026</span>
+      </div>
+      <p class="stack">Go · Next.js · pgBackRest · PgCat</p>
+      <p>
+        A self-hosted PostgreSQL control plane, roughly an open-source RDS. It
+        provisions isolated container-based Postgres instances through the Docker
+        Engine API, with a Go backend on chi and pgx and a management console.
+        High availability through streaming replicas with read/write routing via
+        PgCat. Written test-first, 78% coverage.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> point-in-time recovery is only real if the WAL chain
+        is unbroken, so backups are scheduled to S3 or MinIO through pgBackRest
+        <em>and verified</em>. A restore you have never tested is not a backup.
+      </p>
+      <div class="writing-links">
+        <p class="writing-links__label">Read more on the blog</p>
+        <ul>
+          <li><a href="https://backendbyte.com/series/pgfleet/" target="_blank" rel="noopener">The pgfleet series (3 parts)</a></li>
+          <li><a href="https://backendbyte.com/posts/backend/a-restore-you-never-tested/" target="_blank" rel="noopener">A restore you never tested is not a backup</a></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3><a href="https://runtimelab.io" target="_blank" rel="noopener noreferrer">runtimelab</a></h3>
+        <span class="dates">since Feb 2026</span>
+      </div>
+      <p class="stack">Go · Next.js · PostgreSQL · Docker</p>
+      <p>
+        A self-hostable "build your own X" platform: 464 staged challenges across
+        5 languages. The Go backend does GitHub OAuth, hashed sessions, per-user
+        runner tokens, long-poll job dispatch, SSE log streaming and git
+        smart-HTTP hosting with push-to-test.
+      </p>
+      <p class="hard">
+        <b>The hard part:</b> execution works like a GitLab runner: an agent on
+        the learner's own machine polls for jobs and runs them in Docker against
+        checksum-pinned test suites. The server never executes untrusted code,
+        and hosting cost stays flat as usage grows.
+      </p>
+      <div class="writing-links">
+        <p class="writing-links__label">Read more on the blog</p>
+        <ul>
+          <li><a href="https://backendbyte.com/posts/systems/running-untrusted-code-on-one-vps/" target="_blank" rel="noopener">Running untrusted code on one 4 vCPU box</a></li>
+        </ul>
+      </div>
+    </article>
+
+    <p class="meta">
+      Earlier work on <a href="https://github.com/sagoresarker" target="_blank" rel="noopener noreferrer">GitHub</a>: a
+      Memcached operator built with Kubebuilder, a finite-state-machine task
+      queue, a sliding-window rate limiter in Redis.
+    </p>
+  </section>
+
+  <section>
+    <h2>Writing</h2>
+    <ul class="writing">
+      <li>
+        <a href="https://backendbyte.com/posts/networking/microvm-networking-overlapping-vpcs/" target="_blank" rel="noopener noreferrer">Two VPCs, one bridge, the same gateway IP: networking microVMs when tenant ranges overlap</a>
+        <span class="when">September 2026</span>
+      </li>
+      <li>
+        <a href="https://backendbyte.com/posts/systems/missed-heartbeat-is-not-a-dead-host/" target="_blank" rel="noopener noreferrer">A missed heartbeat is not a dead host</a>
+        <span class="when">October 2026</span>
+      </li>
+      <li>
+        <a href="https://backendbyte.com/posts/systems/lease-with-a-timeout-is-not-a-lock/" target="_blank" rel="noopener noreferrer">A lease with a timeout is not a lock</a>
+        <span class="when">August 2026</span>
+      </li>
+      <li>
+        <a href="https://backendbyte.com/posts/networking/mtu-black-hole-oracle-mss-clamp/" target="_blank" rel="noopener noreferrer">The MTU black hole that looked like a slow database</a>
+        <span class="when">September 2026</span>
+      </li>
+      <li>
+        <a href="https://backendbyte.com/posts/networking/eks-to-tke-without-renaming-hostnames/" target="_blank" rel="noopener noreferrer">Moving from EKS to TKE without renaming a single hostname</a>
+        <span class="when">November 2026</span>
+      </li>
+      <li>
+        <a href="https://backendbyte.com/posts/systems/firecracker-vs-cloud-hypervisor/" target="_blank" rel="noopener noreferrer">Firecracker vs Cloud Hypervisor for untrusted workloads</a>
+        <span class="when">September 2026</span>
+      </li>
+      <li>
+        <a href="https://backendbyte.com/posts/backend/let-the-model-propose-not-decide/" target="_blank" rel="noopener noreferrer">Let the model propose, not decide: keeping an LLM out of the driver's seat in root-cause analysis</a>
+        <span class="when">August 2026</span>
+      </li>
+      <li>
+        <a href="https://backendbyte.com/posts/networking/online-dnssec-signing-ecdsa-p256/" target="_blank" rel="noopener noreferrer">Signing DNS answers per query with ECDSA P-256</a>
+        <span class="when">July 2026</span>
+      </li>
+      <li>
+        <a href="https://backendbyte.com/posts/backend/a-restore-you-never-tested/" target="_blank" rel="noopener noreferrer">A restore you never tested is not a backup</a>
+        <span class="when">July 2026</span>
+      </li>
+      <li class="writing-more">
+        More on microVMs, DNS, Postgres, sandboxing and networking at
+        <a href="https://backendbyte.com/posts/" target="_blank" rel="noopener noreferrer">backendbyte.com</a>.
+      </li>
+    </ul>
+  </section>
+
 
   <section>
     <h2>Tools</h2>
     <dl class="skills">
       <dt>Languages</dt>
-      <dd>Go, Rust, Python, TypeScript, Bash, SQL, C++</dd>
+      <dd>Go, Rust, Python, TypeScript, Bash</dd>
 
-      <dt>Systems</dt>
-      <dd>Firecracker, Cloud Hypervisor, KVM, microVMs, Docker and the Docker
-        Engine API, Linux, cgroups and namespaces, gVisor, eBPF, containers and
-        sandboxing</dd>
+      <dt>Platform</dt>
+      <dd>Kubernetes and operators, ArgoCD, Helm, Terraform, Temporal</dd>
 
-      <dt>Networking</dt>
-      <dd>Open Virtual Network, Open vSwitch, Geneve, BGP and ECMP with GoBGP,
-        Envoy and xDS, WireGuard, NetBird, site-to-site VPN, Transit Gateway,
-        CCN and CEN, gRPC, DNS and DNSSEC</dd>
-
-      <dt>Orchestration</dt>
-      <dd>Kubernetes, controller-runtime and Kubebuilder, Temporal, Helm, ArgoCD,
-        Terraform, Terraspace, Ansible, external-dns, cert-manager, Vault, NGINX,
-        Kong</dd>
+      <dt>Systems &amp; networking</dt>
+      <dd>Firecracker, Cloud Hypervisor, OVN/OVS, BGP, WireGuard, DNS and DNSSEC</dd>
 
       <dt>Data</dt>
-      <dd>PostgreSQL, pgBackRest, PgCat, PgBouncer, MySQL, MongoDB, Redis,
-        ClickHouse, etcd, Kafka, AWS SQS, Google Pub/Sub, RocketMQ</dd>
+      <dd>PostgreSQL, Redis, Kafka, ClickHouse</dd>
 
-      <dt>Clouds</dt>
-      <dd>AWS, Tencent Cloud, Alibaba Cloud, Google Cloud Platform, Cloudflare,
-        bare metal</dd>
-
-      <dt>Observability</dt>
-      <dd>Prometheus, Grafana, OpenTelemetry, OpenSearch, Datadog, Loki, GitLab
-        CI, Jenkins</dd>
+      <dt>Clouds &amp; observability</dt>
+      <dd>AWS, Tencent Cloud, Alibaba Cloud, GCP; Prometheus, Grafana, OpenTelemetry</dd>
     </dl>
   </section>
 
