@@ -78,24 +78,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   line-height: 1.65;
 }
 
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 20px 0 0;
-  padding: 6px 12px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--accent);
-  background: var(--accent-soft);
-  border-radius: 999px;
-}
-.status::before {
-  content: "";
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #2f8a57;
-  box-shadow: 0 0 0 3px rgba(47, 138, 87, 0.18);
-}
 
 .actions {
   display: flex;
@@ -122,11 +104,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .btn--primary { color: #fff; background: var(--accent); border-color: var(--accent); }
 .btn--primary:hover { background: #142f57; }
 
-.where {
-  margin: 18px 0 0;
-  font-size: 0.875rem;
-  color: var(--muted);
-}
 
 /* ---- sections: label column + content -------------------------------------- */
 
@@ -337,7 +314,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 @media print {
   :root { --bg: #fff; --accent: #000; }
   body { font-size: 10pt; }
-  .actions, .skip, .status::before { display: none; }
+  .actions, .skip, .stamp { display: none; }
   .section { grid-template-columns: 120px 1fr; gap: 20px; padding: 16px 0; break-inside: avoid-page; }
   .section > h2 { position: static; }
   .project { border: 1px solid #ccc; break-inside: avoid; }
@@ -348,4 +325,79 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 /* An odd card at the end of the two-column grid spans the full row. */
 @media (min-width: 641px) {
   .projects > .project:last-child:nth-child(even) { grid-column: 1 / -1; }
+}
+
+/* ---- header: two columns, stamp and at-a-glance panel ----------------------- */
+
+.top__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+  gap: 56px;
+  align-items: center;
+}
+.top__main .summary { max-width: 560px; }
+
+.top__side {
+  position: relative;
+  padding: 56px 28px 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+/* A rubber stamp: double rule, slight rotation, ink colour, multiply blend. */
+.stamp {
+  position: absolute;
+  top: -22px;
+  right: 22px;
+  margin: 0;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 16px 7px;
+  color: #23714a;
+  background: rgba(251, 250, 248, 0.92);
+  border: 3px double #23714a;
+  border-radius: 6px;
+  transform: rotate(-6deg);
+  mix-blend-mode: multiply;
+  box-shadow: 0 0 0 1px rgba(35, 113, 74, 0.25);
+}
+.stamp__big {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.stamp__small {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.glance { margin: 0; display: grid; gap: 14px; }
+.glance div { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; }
+.glance dt { font-size: 0.8125rem; font-weight: 600; color: var(--muted); padding-top: 1px; }
+.glance dd { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--ink); }
+
+@media (max-width: 900px) {
+  .top__grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .top__main .summary { max-width: none; }
+}
+
+@media (max-width: 640px) {
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .actions__primary { grid-column: 1 / -1; }
+  .btn { width: 100%; justify-content: center; min-height: 44px; }
+  .top__side { padding: 52px 18px 18px; }
+  .stamp { right: 14px; top: -20px; }
+  .glance div { grid-template-columns: 68px minmax(0, 1fr); gap: 10px; }
 }
