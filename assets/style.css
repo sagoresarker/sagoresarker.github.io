@@ -82,7 +82,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   margin: 28px 0 0;
   padding: 0;
   list-style: none;
@@ -91,8 +91,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   display: inline-flex;
   align-items: center;
   min-height: 40px;
-  padding: 0 16px;
+  padding: 0 14px;
   font-size: 0.9375rem;
+  white-space: nowrap;
   font-weight: 500;
   color: var(--ink);
   background: var(--surface);
@@ -331,7 +332,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 
 .top__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
   gap: 56px;
   align-items: center;
 }
