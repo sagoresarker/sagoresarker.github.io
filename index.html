@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sagore Sarker | Platform &amp; Infrastructure Engineer</title>
-<meta name="description" content="Sagore Sarker is a platform and infrastructure engineer: multi-cloud Kubernetes on AWS, Tencent Cloud and Alibaba Cloud, Firecracker and Cloud Hypervisor microVMs, software-defined networking, DNS with DNSSEC, and PostgreSQL control planes. Founder of Runfix. Dhaka, Bangladesh.">
+<meta name="description" content="Sagore Sarker is a platform and infrastructure engineer: multi-cloud Kubernetes on AWS, Tencent Cloud and Alibaba Cloud, Firecracker and Cloud Hypervisor microVMs, software-defined networking, DNS with DNSSEC, and PostgreSQL control planes. Dhaka, Bangladesh.">
 <meta name="author" content="Sagore Sarker">
 <meta name="robots" content="index, follow, max-image-preview:large">
 
@@ -67,7 +67,10 @@
       </p>
       <dl class="glance">
         <div><dt>Now</dt><dd>DevOps Engineer II at Lotus's (CP Axtra), moving production from AWS to Tencent Cloud</dd></div>
+        <!-- Runfix hidden for now:
         <div><dt>Building</dt><dd><a href="https://runfix.dev" target="_blank" rel="noopener">Runfix</a>, the safety net for apps built with AI</dd></div>
+        -->
+        <div><dt>Building</dt><dd>A microVM agent cloud: one isolated VM per AI coding session</dd></div>
         <div><dt>Writing</dt><dd><a href="https://backendbyte.com/" target="_blank" rel="noopener">backendbyte.com</a>, infrastructure deep dives</dd></div>
         <div><dt>Based in</dt><dd>Dhaka, Bangladesh (UTC+6)</dd></div>
       </dl>
@@ -127,8 +130,7 @@
         </ul>
         <p class="stack">Go · Firecracker · OVN/OVS · BGP · Kubernetes · ArgoCD · gRPC · Redis</p>
         <p class="reads"><span>On the blog:</span>
-          <a href="https://backendbyte.com/series/building-a-microvm-cloud/" target="_blank" rel="noopener">Building a microVM cloud (series)</a>,
-          <a href="https://backendbyte.com/posts/systems/firecracker-vs-cloud-hypervisor/" target="_blank" rel="noopener">Firecracker vs Cloud Hypervisor</a></p>
+          <a href="https://backendbyte.com/series/building-a-microvm-cloud/" target="_blank" rel="noopener">Building a microVM cloud (series)</a></p>
       </article>
 
     </div>
@@ -139,7 +141,8 @@
     <div class="content">
       <div class="projects">
 
-        <article class="project project--featured">
+        <!-- Runfix hidden for now:
+        <article class="project project&#45;&#45;featured">
           <div class="project__head">
             <h3><a href="https://runfix.dev" target="_blank" rel="noopener">Runfix</a></h3>
             <span class="project__tag">Founder</span>
@@ -147,6 +150,18 @@
           <p>The safety net for apps built with AI. It watches errors and deploys, and when production breaks it reproduces the failure, writes a fix and opens a pull request. It never merges or deploys on its own.</p>
           <p class="project__hard"><b>The hard part:</b> a fix from a model is a guess until something proves it, so every fix ships with a test that fails before the change and passes after.</p>
           <p class="reads"><a href="https://backendbyte.com/posts/devtools/runfix-safety-net-for-ai-built-apps/" target="_blank" rel="noopener">Read about Runfix</a></p>
+        </article>
+        -->
+
+        <article class="project project--featured">
+          <div class="project__head">
+            <h3>Agent cloud</h3>
+            <span class="project__tag">MicroVM platform</span>
+          </div>
+          <p>A platform that runs headless AI coding agents in hardware-isolated microVMs, one per session: a control plane, a per-host worker and an in-guest init, with live output streaming, persistent volumes and snapshots to object storage.</p>
+          <p class="project__hard"><b>The hard part:</b> isolation without leaking secrets. Egress is deny-by-default per VM, real credentials are injected at the egress proxy and never enter the guest, and hosts dial out so no host exposes an inbound port.</p>
+          <p class="stack">Rust · Firecracker · Cloud Hypervisor · KVM · PostgreSQL · S3</p>
+          <p class="reads"><a href="https://backendbyte.com/series/microvms/" target="_blank" rel="noopener">The MicroVMs in practice series</a></p>
         </article>
 
         <article class="project">
@@ -214,7 +229,7 @@
     <div class="content">
       <ul class="posts">
         <li><a href="https://backendbyte.com/posts/networking/microvm-networking-overlapping-vpcs/" target="_blank" rel="noopener">MicroVM networking with overlapping VPCs</a><time datetime="2026-09">Sep 2026</time></li>
-        <li><a href="https://backendbyte.com/posts/systems/missed-heartbeat-is-not-a-dead-host/" target="_blank" rel="noopener">A missed heartbeat is not a dead host</a><time datetime="2026-10">Oct 2026</time></li>
+        <li><a href="https://backendbyte.com/posts/networking/vxlan-control-plane-from-scratch-in-go/" target="_blank" rel="noopener">A VXLAN overlay and control plane, from scratch in Go</a><time datetime="2026-08">Aug 2026</time></li>
         <li><a href="https://backendbyte.com/posts/systems/lease-with-a-timeout-is-not-a-lock/" target="_blank" rel="noopener">A lease with a timeout is not a lock</a><time datetime="2026-08">Aug 2026</time></li>
         <li><a href="https://backendbyte.com/posts/networking/mtu-black-hole-oracle-mss-clamp/" target="_blank" rel="noopener">The MTU black hole that looked like a slow database</a><time datetime="2026-09">Sep 2026</time></li>
         <li><a href="https://backendbyte.com/posts/networking/eks-to-tke-without-renaming-hostnames/" target="_blank" rel="noopener">Moving from EKS to TKE without renaming a hostname</a><time datetime="2026-11">Nov 2026</time></li>
